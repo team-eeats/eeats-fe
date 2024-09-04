@@ -1,17 +1,28 @@
 import * as S from "./style";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import nonCheck from "../../assets/img/nonCheck.svg";
 import check from "../../assets/img/check.svg";
 
 const TextVote = () => {
-  const [isSelect, setIsSelect] = useState<number>();
+  const [isSelect, setIsSelect] = useState<number>(-1);
   const [isIng, setIsIng] = useState<boolean>(false);
+  const [voteArray, setVoteArray] = useState<
+    { name: string; percent?: number }[]
+  >([]);
 
-  const temp: { name: string; percent: number }[] = [
-    { name: "국물떡볶이", percent: 33 },
-    { name: "국물라볶이", percent: 33 },
-    { name: "국물김말이", percent: 33 },
-  ];
+  useEffect(() => {
+    setVoteArray([
+      { name: "국물떡볶이", percent: 33 },
+      { name: "국물라볶이", percent: 33 },
+      { name: "국물김말이", percent: 33 },
+    ]);
+  }, []);
+
+  useEffect(() => {
+    if (voteArray.length > 0 && voteArray[0].percent !== undefined) {
+      setIsIng(true);
+    }
+  }, [voteArray]);
 
   const handleSelect = (index: number) => {
     setIsSelect(index);
@@ -19,7 +30,7 @@ const TextVote = () => {
 
   return (
     <S.TextVoteContainer>
-      {temp?.map(({ name, percent }, index) =>
+      {voteArray?.map(({ name, percent }, index) =>
         isSelect === index ? (
           <S.VoteArray
             key={index}
