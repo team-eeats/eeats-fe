@@ -12,19 +12,11 @@ interface VoteNameType {
 }
 
 export const VoteArray = styled.p<VoteNameType>`
-  color: ${({ select }) => (select ? "#FF583B" : "#000")};
-  text-align: center;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
   display: flex;
   justify-content: space-between;
   padding: 12px 0px;
   box-sizing: border-box;
-  & > div {
-    color: ${({ select }) => (select ? "#FF583B" : "#000")};
-  }
+  cursor: pointer;
 `;
 
 export const CheckImg = styled.img`

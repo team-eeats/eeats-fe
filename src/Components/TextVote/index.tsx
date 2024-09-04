@@ -2,10 +2,12 @@ import * as S from "./style";
 import { useEffect, useState } from "react";
 import nonCheck from "../../assets/img/nonCheck.svg";
 import check from "../../assets/img/check.svg";
+import { Font } from "../../Styles/Font";
 
 const TextVote = () => {
   const [isSelect, setIsSelect] = useState<number>(-1);
   const [isIng, setIsIng] = useState<boolean>(false);
+  const [isNotVoting, setIsNotVoting] = useState<boolean>(true);
   const [voteArray, setVoteArray] = useState<
     { name: string; percent?: number }[]
   >([]);
@@ -19,42 +21,39 @@ const TextVote = () => {
   }, []);
 
   useEffect(() => {
-    if (voteArray.length > 0 && voteArray[0].percent !== undefined) {
-      setIsIng(true);
-    }
+    const hasPercent = voteArray.some((item) => item.percent !== undefined);
+    setIsIng(hasPercent);
   }, [voteArray]);
 
   const handleSelect = (index: number) => {
-    setIsSelect(index);
+    if (isNotVoting) {
+      setIsSelect(index);
+      setIsNotVoting(false);
+    }
   };
 
   return (
     <S.TextVoteContainer>
-      {voteArray?.map(({ name, percent }, index) =>
-        isSelect === index ? (
+      {voteArray?.map(({ name, percent }, index) => {
+        const isSelected = isSelect === index;
+        const textColor = isSelected ? "main400" : "black";
+        const imgSrc = isSelected ? check : nonCheck;
+
+        return (
           <S.VoteArray
             key={index}
-            select={true}
+            select={isSelected}
             onClick={() => handleSelect(index)}
           >
-            {name}
-            {isIng ? <div>{percent}%</div> : <S.CheckImg src={check} alt="" />}
-          </S.VoteArray>
-        ) : (
-          <S.VoteArray
-            key={index}
-            select={false}
-            onClick={() => handleSelect(index)}
-          >
-            {name}
+            <Font text={name} kind="Body1" color={textColor} />
             {isIng ? (
-              <div>{percent}%</div>
+              <Font text={`${percent}%`} kind="Heading4" color={textColor} />
             ) : (
-              <S.CheckImg src={nonCheck} alt="" />
+              <S.CheckImg src={imgSrc} alt="" />
             )}
           </S.VoteArray>
-        )
-      )}
+        );
+      })}
     </S.TextVoteContainer>
   );
 };
