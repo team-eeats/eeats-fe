@@ -1,7 +1,7 @@
 import * as S from "./style";
 import { useEffect, useState } from "react";
-import nonCheck from "../../assets/img/nonCheck.svg";
-import check from "../../assets/img/check.svg";
+import nonCheck from "../../assets/img/SVG/nonCheck.svg";
+import check from "../../assets/img/SVG/check.svg";
 import { Font } from "../../Styles/Font";
 
 const TextVote = () => {
