@@ -7,6 +7,7 @@ import DinnerList from "./Components/MealList/DinnerList";
 import AllergyNotification from "./Components/AllergyNotification/AllergyNotification";
 import NoAllergy from "./Components/AllergyNotification/NoAllergy";
 import { PhotoVote } from "./Components/PhotoVote";
+import DonutGraph from "./Components/DonutGraph";
 import { CompletePhotoVote } from "./Components/CompletePhotoVote";
 
 function router() {
@@ -14,6 +15,7 @@ function router() {
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
+        <Route path="/donut" element={<DonutGraph />} />
         <Route path="/photoVote" element={<PhotoVote />} />
         <Route path="/CompletePhotoVote" element={<CompletePhotoVote />} />
         <Route path="/MealTime" element={<MealTime />} />
