@@ -7,21 +7,21 @@ import DinnerList from "./Components/MealList/DinnerList";
 import AllergyNotification from "./Components/AllergyNotification/AllergyNotification";
 import NoAllergy from "./Components/AllergyNotification/NoAllergy";
 import { PhotoVote } from "./Components/PhotoVote";
-import { ConpletePhotoVote } from "./Components/ConpletePhotoVote";
+import { CompletePhotoVote } from "./Components/CompletePhotoVote";
 
 function router() {
   return (
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
+        <Route path="/photoVote" element={<PhotoVote />} />
+        <Route path="/CompletePhotoVote" element={<CompletePhotoVote />} />
         <Route path="/MealTime" element={<MealTime />} />
         <Route path="/BreakfastList" element={<BreakfastList />} />
         <Route path="/LunchList" element={<LunchList />} />
         <Route path="/DinnerList" element={<DinnerList />} />
         <Route path="/AllergyNotification" element={<AllergyNotification />} />
         <Route path="/NoAllergy" element={<NoAllergy />} />
-        <Route path="/asdf" element={<PhotoVote />} />
-        <Route path="/fdsa" element={<ConpletePhotoVote />} />
       </Routes>
     </BrowserRouter>
   );
