@@ -6,8 +6,10 @@ import LunchList from "./Components/MealList/LunchList";
 import DinnerList from "./Components/MealList/DinnerList";
 import AllergyNotification from "./Components/AllergyNotification/AllergyNotification";
 import NoAllergy from "./Components/AllergyNotification/NoAllergy";
+import { PhotoVote } from "./Components/PhotoVote";
+import { ConpletePhotoVote } from "./Components/ConpletePhotoVote";
 
-function MainRouter() {
+function router() {
   return (
     <BrowserRouter>
       <GlobalStyle />
@@ -18,9 +20,11 @@ function MainRouter() {
         <Route path="/DinnerList" element={<DinnerList />} />
         <Route path="/AllergyNotification" element={<AllergyNotification />} />
         <Route path="/NoAllergy" element={<NoAllergy />} />
+        <Route path="/asdf" element={<PhotoVote />} />
+        <Route path="/fdsa" element={<ConpletePhotoVote />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
-export default MainRouter;
+export default router;
