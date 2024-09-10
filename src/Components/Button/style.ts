@@ -18,4 +18,5 @@ export const ButtonContainer = styled.button<ButtonContainerPropsType>`
         : Color.main100
       : Color.main500};
   cursor: pointer;
+  user-select: none;
 `;
