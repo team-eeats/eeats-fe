@@ -8,6 +8,7 @@ import AllergyNotification from "./Components/AllergyNotification/AllergyNotific
 import NoAllergy from "./Components/AllergyNotification/NoAllergy";
 import { PhotoVote } from "./Components/PhotoVote";
 import { ConpletePhotoVote } from "./Components/ConpletePhotoVote";
+import TabBar from "./Components/TabNavigation/TabBar"
 
 function router() {
   return (
@@ -22,6 +23,7 @@ function router() {
         <Route path="/NoAllergy" element={<NoAllergy />} />
         <Route path="/asdf" element={<PhotoVote />} />
         <Route path="/fdsa" element={<ConpletePhotoVote />} />
+        <Route path="/tab" element={<TabBar />} />
       </Routes>
     </BrowserRouter>
   );
