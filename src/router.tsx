@@ -10,6 +10,8 @@ import { PhotoVote } from "./Components/PhotoVote";
 import { ConpletePhotoVote } from "./Components/ConpletePhotoVote";
 import TabBar from "./Components/TabNavigation/TabBar"
 import DonutGraph from "./Components/DonutGraph";
+import { CompletePhotoVote } from "./Components/CompletePhotoVote";
+import { Header } from "./Components/Header";
 
 function router() {
   return (
@@ -25,8 +27,7 @@ function router() {
         <Route path="/DinnerList" element={<DinnerList />} />
         <Route path="/AllergyNotification" element={<AllergyNotification />} />
         <Route path="/NoAllergy" element={<NoAllergy />} />
-        <Route path="/asdf" element={<PhotoVote />} />
-        <Route path="/fdsa" element={<ConpletePhotoVote />} />
+        <Route path="/Header" element={<Header />} />
         <Route path="/tab" element={<TabBar />} />
       </Routes>
     </BrowserRouter>
