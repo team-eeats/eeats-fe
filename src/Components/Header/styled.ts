@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  height: 70px;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 `;
 
 export const Logo = styled.img`
