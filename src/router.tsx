@@ -1,7 +1,7 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { GlobalStyle } from "./Styles/GlobalStyle.style";
 import Layout from "./Components/Layout";
-import Suggest from "./Pages/Suggest";
+import Suggest from "./Pages/Suggest"
 
 function router() {
   return (
