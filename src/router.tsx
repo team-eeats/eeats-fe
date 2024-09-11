@@ -9,12 +9,16 @@ import NoAllergy from "./Components/AllergyNotification/NoAllergy";
 import { PhotoVote } from "./Components/PhotoVote";
 import { ConpletePhotoVote } from "./Components/ConpletePhotoVote";
 import TabBar from "./Components/TabNavigation/TabBar"
+import DonutGraph from "./Components/DonutGraph";
 
 function router() {
   return (
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
+        <Route path="/donut" element={<DonutGraph />} />
+        <Route path="/photoVote" element={<PhotoVote />} />
+        <Route path="/CompletePhotoVote" element={<CompletePhotoVote />} />
         <Route path="/MealTime" element={<MealTime />} />
         <Route path="/BreakfastList" element={<BreakfastList />} />
         <Route path="/LunchList" element={<LunchList />} />

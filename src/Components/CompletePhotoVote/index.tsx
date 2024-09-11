@@ -6,7 +6,7 @@ import malatang from "../../Assets/img/PNG/malatang.png";
 import { Font } from "../../Styles/Font";
 import { useEffect, useState } from "react";
 
-export const ConpletePhotoVote = () => {
+export const CompletePhotoVote = () => {
   const ex = [
     { photo: ddeokbokki, name: "떡볶이", percent: 76 },
     { photo: dakgalbi, name: "닭갈비", percent: 32 },

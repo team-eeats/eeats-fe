@@ -3,7 +3,7 @@ import dakgalbi from "../../Assets/img/PNG/dakgalbi.jpg";
 import ddeokbokki from "../../Assets/img/PNG/ddeokbokki.png";
 import chobab from "../../Assets/img/PNG/chobab.png";
 import malatang from "../../Assets/img/PNG/malatang.png";
-import VoteConplete from "../../Assets/img/SVG/VoteConplete.svg";
+import VoteComplete from "../../Assets/img/SVG/VoteComplete.svg";
 import { Font } from "../../Styles/Font";
 import { useState } from "react";
 
@@ -43,7 +43,7 @@ export const PhotoVote = () => {
               onClick={() => ClickVote(index)}
             />
             <S.Vote
-              src={VoteConplete}
+              src={VoteComplete}
               vote={vote === index}
               onClick={() => ClickVote(index)}
             />
