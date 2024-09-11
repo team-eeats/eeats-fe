@@ -3,7 +3,7 @@ import * as S from './style';
 import { Font } from '../../Styles/Font';
 import { ArrowLeft, ArrowRight } from "../../assets/img/SVG";
 
-const day = ["일", "월", "화", "수", "목", "금", "토"];
+const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -12,11 +12,13 @@ const Calendar = () => {
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
-  const firstDayOfMonth = new Date(year, month, 1);
-  const startDay = new Date(firstDayOfMonth);
-  startDay.setDate(1 - firstDayOfMonth.getDay());
-
-  const endDay = new Date(year, month + 1, 0);
+  const getStartAndEndDays = () => {
+    const firstDayOfMonth = new Date(year, month, 1);
+    const startDay = new Date(firstDayOfMonth);
+    startDay.setDate(1 - firstDayOfMonth.getDay());
+    const endDay = new Date(year, month + 1, 0);
+    return { startDay, endDay };
+  };
 
   const groupDatesByWeek = (startDay: Date, endDay: Date) => {
     const weeks = [];
@@ -39,65 +41,43 @@ const Calendar = () => {
     return weeks;
   };
 
-  const handlePrevMonth = () => {
-    setCurrentDate(
-      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
-    );
+  const handleMonthChange = (direction: 'prev' | 'next') => {
+    setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth() + (direction === 'prev' ? -1 : 1), 1));
   };
 
-  const handleNextMonth = () => {
-    setCurrentDate(
-      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
-    );
-  };
+  const isToday = (date: Date) => new Date().toDateString() === date.toDateString();
+  const isPastDate = (date: Date) => date < new Date();
+  const isCurrentMonth = (date: Date) => date.getMonth() === currentDate.getMonth();
+  const isSelectedDate = (date: Date) => selectedDate?.toDateString() === date.toDateString();
 
-  const isToday = (date: Date) => {
-    const today = new Date();
-    return today.toDateString() === date.toDateString();
-  };
-
-  const isPastDate = (date: Date) => {
-    const today = new Date();
-    return date < today;
-  };
-
-  const isCurrentMonth = (date: Date) => {
-    return date.getMonth() === currentDate.getMonth();
-  };
-
-  const isSelectedDate = (date: Date) => {
-    return selectedDate?.toDateString() === date.toDateString();
-  };
-
-  const handleDateClick = (date: Date) => {
-    setSelectedDate(date);
-  };
+  const { startDay, endDay } = getStartAndEndDays();
+  const weeks = groupDatesByWeek(startDay, endDay);
 
   return (
     <S.Container>
       <S.CalendarShiftWrap>
-        <div onClick={handlePrevMonth}>
+        <div onClick={() => handleMonthChange('prev')}>
           <ArrowLeft />
         </div>
         <Font kind="Heading3" text={`${year}년 ${month + 1}월`} />
-        <div onClick={handleNextMonth}>
+        <div onClick={() => handleMonthChange('next')}>
           <ArrowRight />
         </div>
       </S.CalendarShiftWrap>
       <S.DayWrap>
-        {day.map((value, index) => (
+        {daysOfWeek.map((day, index) => (
           <S.Day key={index}>
-            <Font kind="Heading4" text={value} />
+            <Font kind="Heading4" text={day} />
           </S.Day>
         ))}
       </S.DayWrap>
       <S.Month>
-        {groupDatesByWeek(startDay, endDay).map((week, weekIndex) => (
+        {weeks.map((week, weekIndex) => (
           <S.Week key={weekIndex}>
             {week.map((date, dateIndex) => (
               <S.Date
                 key={dateIndex}
-                onClick={() => handleDateClick(date)}
+                onClick={() => setSelectedDate(date)}
                 isToday={isToday(date)}
                 isPast={isPastDate(date)}
                 isCurrentMonth={isCurrentMonth(date)}
