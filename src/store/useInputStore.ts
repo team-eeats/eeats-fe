@@ -1,13 +1,15 @@
-import { create } from 'zustand';
+import create from 'zustand';
 
 interface InputState {
-  value: string;
-  setValue: (newValue: string) => void;
+  inputs: { [key: string]: string };
+  setInput: (key: string, value: string) => void;
 }
 
 const useInputStore = create<InputState>((set) => ({
-  value: '',
-  setValue: (newValue: string) => set({ value: newValue }),
+  inputs: {},
+  setInput: (key: string, value: string) => set((state) => ({
+    inputs: { ...state.inputs, [key]: value }
+  })),
 }));
 
 export default useInputStore;
