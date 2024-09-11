@@ -3,7 +3,6 @@ import { Color } from "../../Styles/Color";
 
 interface ButtonContainerPropsType {
   activate: boolean;
-  available: boolean;
 }
 
 export const ButtonContainer = styled.button<ButtonContainerPropsType>`
@@ -12,11 +11,11 @@ export const ButtonContainer = styled.button<ButtonContainerPropsType>`
   border-radius: 16px;
   border: none;
   background-color: ${(props) =>
-    props.available
-      ? props.activate
-        ? Color.main300
-        : Color.main100
-      : Color.main500};
+    props.activate ? Color.main300 : Color.main100};
   cursor: pointer;
   user-select: none;
+  &:hover {
+    background-color: ${(props) =>
+      props.activate ? Color.main500 : Color.main100};
+  }
 `;
