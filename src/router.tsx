@@ -11,6 +11,7 @@ import TabBar from "./Components/TabNavigation/TabBar";
 import DonutGraph from "./Components/DonutGraph";
 import { CompletePhotoVote } from "./Components/CompletePhotoVote";
 import { Header } from "./Components/Header";
+import Calendar from "./Components/Calendar";
 
 function router() {
   return (
@@ -28,6 +29,7 @@ function router() {
         <Route path="/NoAllergy" element={<NoAllergy />} />
         <Route path="/Header" element={<Header />} />
         <Route path="/tab" element={<TabBar />} />
+        <Route path="/calendar" element={<Calendar />} />
       </Routes>
     </BrowserRouter>
   );
