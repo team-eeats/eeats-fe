@@ -22,7 +22,7 @@ const UserSuggestBox = () => {
                     <Font text="멋진토마토" kind="Body1" color="main200" />
                     <Font text="8월 28일" kind="Body1" color="gray300" />
                 </S.NicknameAndDateWrap>
-                <img src={Setting} alt="더보기" onClick={() => setOpenModal(!openModal)} />
+                <img src={Setting} alt="더보기" onClick={(e) =>  {e.stopPropagation(); setOpenModal(!openModal)}} />
             </S.TopWrap>
 
             <Font text="선생님 밥이 사악 맛있어요ㅜㅜ!" kind="Heading3" />
@@ -38,9 +38,7 @@ const UserSuggestBox = () => {
                         </S.Comment>
                     ) : (<></>)
             }
-            {
-                openModal ? <ModifyDeleteModal/> : <></>
-            }
+            { openModal && <ModifyDeleteModal /> }
         </S.Container>
     )
 }

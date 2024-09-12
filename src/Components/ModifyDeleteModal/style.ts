@@ -2,15 +2,24 @@ import styled from "styled-components";
 import { Color } from "../../Styles/Color";
 
 export const Container = styled.div`
-position: absolute;
+width: 100%;
+height: 100vh;
+position: fixed;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-width: 480px;
 display: flex;
 flex-direction: column;
+justify-content: center;
 align-items: center;
+background-color : rgba(0,0,0,0.2);
+z-index: 100;
+`
+
+export const Modal = styled.div`
+width: 480px;
 border-radius: 12px;
+background-color: ${Color.white};
 `
 
 export const TextWrap = styled.div`
