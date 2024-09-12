@@ -1,8 +1,20 @@
+import { useState } from 'react';
 import * as S from './style'
 import { Font } from '../../Styles/Font';
 import Button from '../../Components/Button';
 
 const Modify = () => {
+  const [inputCount, setInputCount] = useState<number>(0)
+  const [excessLimit, setExcessLimit] = useState<boolean>(false)
+
+  const onInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputCount(e.target.value.length);
+    if (inputCount > 30) {
+      return setExcessLimit(true)
+    }
+    setExcessLimit(false)
+  }
+
   return (
     <S.Container>
       <S.SubmitContent>
@@ -18,9 +30,9 @@ const Modify = () => {
             <S.LabelWrap>
               <Font text="건의 내용" kind="Label2" />
               <S.TextAreaWrap>
-                <S.TextArea placeholder="건의 내용을 작성해주세요"></S.TextArea>
+                <S.TextArea placeholder="건의 내용을 작성해주세요" onChange={(e) => onInputHandler(e)}></S.TextArea>
                 <S.CharacterLimitation>
-                  <Font text="7/30" kind="Caption2" color="gray300" />
+                  <Font text={`${inputCount}/30`} kind="Caption2" color={`${excessLimit ? "main300" : "gray300"}`} />
                 </S.CharacterLimitation>
               </S.TextAreaWrap>
             </S.LabelWrap>
