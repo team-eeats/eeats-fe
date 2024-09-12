@@ -12,6 +12,7 @@ const LoginPage = () => {
   useEffect(() => {
     if (inputs["loginText"] && inputs["loginPassword"]) setButtonActive(true);
     else setButtonActive(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputs["loginText"], inputs["loginPassword"]]);
 
   return (
