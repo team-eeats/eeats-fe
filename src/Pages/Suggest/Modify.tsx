@@ -7,8 +7,10 @@ const Modify = () => {
     <S.Container>
       <S.SubmitContent>
         <S.ContentBox>
-          <Font text="건의 수정하기" kind="Heading1" />
-          <S.TitleAndContent>
+          <S.Title>
+            <Font text="건의 수정하기" kind="Heading1" />
+          </S.Title>
+          <S.Write>
             <S.LabelWrap>
               <Font text="제목" kind="Label2" />
               <S.Input placeholder="제목을 작성해주세요"></S.Input>
@@ -22,7 +24,7 @@ const Modify = () => {
                 </S.CharacterLimitation>
               </S.TextAreaWrap>
             </S.LabelWrap>
-          </S.TitleAndContent>
+          </S.Write>
         </S.ContentBox>
         <Button text="수정하기" activate onClick={() => { }} />
       </S.SubmitContent>

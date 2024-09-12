@@ -54,7 +54,13 @@ flex-direction: column;
 gap: 60px;
 `
 
-export const TitleAndContent = styled.div`
+export const Title = styled.div`
+width: 100%;
+display: flex;
+justify-content: center;
+`
+
+export const Write = styled.div`
 display: flex;
 flex-direction: column;
 gap: 40px;
