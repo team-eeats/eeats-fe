@@ -23,6 +23,8 @@ background-color: ${Color.white};
 `
 
 export const TextWrap = styled.div`
+width: 100%;
+height: 101px;
 display: flex;
 justify-content: center;
 padding: 36px 124px;
