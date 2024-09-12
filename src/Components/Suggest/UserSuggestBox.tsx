@@ -3,6 +3,7 @@ import * as S from "./index"
 import { Font } from "../../Styles/Font"
 import Setting from "../../assets/img/Setting.svg"
 import ArrowRight from "../../assets/img/ArrowRight.svg"
+import ModifyDeleteModal from "../ModifyDeleteModal"
 
 /**
  * 
@@ -12,6 +13,7 @@ import ArrowRight from "../../assets/img/ArrowRight.svg"
 const UserSuggestBox = () => {
 
     const [selected, setSelected] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
 
     return (
         <S.Container onClick={() => setSelected(!selected)} selected={selected}>
@@ -20,7 +22,7 @@ const UserSuggestBox = () => {
                     <Font text="멋진토마토" kind="Body1" color="main200" />
                     <Font text="8월 28일" kind="Body1" color="gray300" />
                 </S.NicknameAndDateWrap>
-                <img src={Setting} alt="더보기" />
+                <img src={Setting} alt="더보기" onClick={() => setOpenModal(!openModal)} />
             </S.TopWrap>
 
             <Font text="선생님 밥이 사악 맛있어요ㅜㅜ!" kind="Heading3" />
@@ -36,7 +38,9 @@ const UserSuggestBox = () => {
                         </S.Comment>
                     ) : (<></>)
             }
-
+            {
+                openModal ? <ModifyDeleteModal/> : <></>
+            }
         </S.Container>
     )
 }
