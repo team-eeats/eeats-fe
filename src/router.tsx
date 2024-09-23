@@ -1,9 +1,9 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { GlobalStyle } from "./Styles/GlobalStyle.style";
 import Layout from "./Components/Layout";
-import Suggest from "./Pages/Suggest"
+import Suggest from "./Pages/Suggest";
 import SuggestModify from "./Pages/Suggest/Modify";
-import SuggestUpload from "./Pages/Suggest/Upload"
+import SuggestUpload from "./Pages/Suggest/Upload";
 import MealTime from "./Components/MealTime/MealTime";
 import BreakfastList from "./Components/MealList/BreakfastList";
 import LunchList from "./Components/MealList/LunchList";
@@ -16,7 +16,6 @@ import DonutGraph from "./Components/DonutGraph";
 import { CompletePhotoVote } from "./Components/CompletePhotoVote";
 import { Header } from "./Components/Header";
 import LoginPage from "./page/loginPage";
-import { NicknameChange } from "./Components/NicknameChange";
 
 function router() {
   return (
@@ -40,7 +39,6 @@ function router() {
         <Route path="/Header" element={<Header />} />
         <Route path="/tab" element={<TabBar />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/nickname" element={<NicknameChange />} />
       </Routes>
     </BrowserRouter>
   );
