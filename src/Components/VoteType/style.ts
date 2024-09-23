@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Color } from "../../Styles/Color";
 
 export const VoteTypeContainer = styled.div`
-  width: 100%;
+  width: 400px;
   height: 58px;
   display: flex;
 `;
