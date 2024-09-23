@@ -12,6 +12,7 @@ import DonutGraph from "./Components/DonutGraph";
 import { CompletePhotoVote } from "./Components/CompletePhotoVote";
 import { Header } from "./Components/Header";
 import { AlarmModal } from "./Components/AlarmModal";
+import { MyPageModal } from "./Components/MyPageModal";
 
 function router() {
   return (
@@ -30,6 +31,7 @@ function router() {
         <Route path="/Header" element={<Header />} />
         <Route path="/tab" element={<TabBar />} />
         <Route path="/AlarmModal" element={<AlarmModal />} />
+        <Route path="/MypageModal" element={<MyPageModal />} />
       </Routes>
     </BrowserRouter>
   );
