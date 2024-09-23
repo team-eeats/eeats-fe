@@ -5,20 +5,21 @@ import { ChangeEvent, useState } from "react";
 import useInputStore from "../../store/useInputStore";
 
 interface InputProps {
+  id: string;
   type: string;
   placeholder: string;
 }
 
-const Input = ({ type, placeholder }: InputProps) => {
+const Input = ({ id, type, placeholder }: InputProps) => {
   const [showPswd, setShowPswd] = useState(false);
-  const {value, setValue} = useInputStore();
+  const { inputs, setInput } = useInputStore();
 
   const togglePasswordVisibility = () => {
     setShowPswd((prevState) => !prevState);
   };
 
   const handleValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    setInput(id, e.target.value);
   };
 
   return (
@@ -27,7 +28,7 @@ const Input = ({ type, placeholder }: InputProps) => {
         <S.Input
           type={showPswd && type === "password" ? "text" : type}
           placeholder={placeholder}
-          value={value}
+          value={inputs[id] || ""}
           onChange={handleValue}
         />
         {type === "password" && (
