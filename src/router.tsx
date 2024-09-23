@@ -16,6 +16,7 @@ import DonutGraph from "./Components/DonutGraph";
 import { CompletePhotoVote } from "./Components/CompletePhotoVote";
 import { Header } from "./Components/Header";
 import LoginPage from "./page/loginPage";
+import { NicknameChange } from "./Components/NicknameChange";
 
 function router() {
   return (
@@ -39,6 +40,7 @@ function router() {
         <Route path="/Header" element={<Header />} />
         <Route path="/tab" element={<TabBar />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/nickname" element={<NicknameChange />} />
       </Routes>
     </BrowserRouter>
   );

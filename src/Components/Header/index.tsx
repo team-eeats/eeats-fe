@@ -1,4 +1,4 @@
-import * as S from "./styled";
+import * as S from "./style";
 import MyPage from "../../Assets/img/SVG/MyPage.svg";
 import Alarm from "../../Assets/img/SVG/Alarm.svg";
 import Logo from "../../Assets/img/SVG/Logo.svg";
