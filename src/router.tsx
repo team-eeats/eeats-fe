@@ -1,9 +1,9 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { GlobalStyle } from "./Styles/GlobalStyle.style";
 import Layout from "./Components/Layout";
-import Suggest from "./Pages/Suggest"
+import Suggest from "./Pages/Suggest";
 import SuggestModify from "./Pages/Suggest/Modify";
-import SuggestUpload from "./Pages/Suggest/Upload"
+import SuggestUpload from "./Pages/Suggest/Upload";
 import MealTime from "./Components/MealTime/MealTime";
 import BreakfastList from "./Components/MealList/BreakfastList";
 import LunchList from "./Components/MealList/LunchList";
