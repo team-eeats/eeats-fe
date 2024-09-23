@@ -11,10 +11,10 @@ const DeleteModal = () => {
           <Font kind="Body2" text="확인 시 해당 건의는 사라집니다." color="gray600" />
         </S.TextWrap>
         <S.ButtonWrap>
-          <S.DeleteButton>
+          <S.DeleteButton onClick={() => {}}>
             <Font text="취소" kind="Button2" color="white" />
           </S.DeleteButton>
-          <Button text="확인" activate={true} onClick={() => { }} />
+          <Button text="확인" activate={true} onClick={() => {}} />
         </S.ButtonWrap>
       </S.Content>
     </S.Container>
