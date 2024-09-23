@@ -1,10 +1,10 @@
 import { Font } from "../../Styles/Font";
-import AllergyTags from "../AllergyTags";
 import * as S from "./styled";
 import Notice from "../../Assets/img/SVG/Notice.svg";
 import Medicine from "../../Assets/img/SVG/Medicine.svg";
 import Suggest from "../../Assets/img/SVG/suggest.svg";
 import Logout from "../../Assets/img/SVG/Logout.svg";
+import { MyAllergy } from "../MyAllergy";
 
 export const MyPageModal = () => {
   const List = [
@@ -20,8 +20,8 @@ export const MyPageModal = () => {
           <Font text="수정하기" kind="Body4" color="gray300" />
         </S.TextWrapper>
         <S.Tags>
-          <AllergyTags food="고등어" />
-          <AllergyTags food="게" />
+          <MyAllergy food="고등어" />
+          <MyAllergy food="게" />
         </S.Tags>
       </S.TopWrapper>
       <S.Line></S.Line>
