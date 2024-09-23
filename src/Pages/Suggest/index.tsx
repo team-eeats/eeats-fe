@@ -1,5 +1,5 @@
 import * as S from "./style"
-import SuggestBox from "../../Components/Suggest/UserSuggestBox";
+import SuggestBox from "../../Components/UserSuggestBox";
 import Announcement from "../../Components/Announcement/Announcement";
 import { Font } from "../../Styles/Font";
 import Write from '../../assets/img/SVG/Write.svg'

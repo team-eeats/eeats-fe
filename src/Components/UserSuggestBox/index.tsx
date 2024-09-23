@@ -1,5 +1,5 @@
 import { useState } from "react"
-import * as S from "./index"
+import * as S from "./style"
 import { Font } from "../../Styles/Font"
 import Setting from "../../assets/img/Setting.svg"
 import ArrowRight from "../../assets/img/ArrowRight.svg"
