@@ -31,21 +31,3 @@ flex-direction: column;
 align-items: center;
 gap: 20px;
 `
-
-export const ButtonWrap = styled.div`
-display: flex;
-gap: 20px;
-`
-
-export const DeleteButton = styled.div`
-  width: 138px;
-  height: 55px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 16px;
-  border: none;
-  background-color: ${Color.gray200};
-  cursor: pointer;
-  user-select: none;
-`
