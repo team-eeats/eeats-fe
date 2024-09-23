@@ -12,7 +12,7 @@ const ModifyDeleteModal = () => {
           <Font kind="Button1" text="수정하기" />
         </S.TextWrap>
         <S.Line></S.Line>
-        <S.TextWrap>
+        <S.TextWrap onClick={() => navigate("/deleteModal")}>
           <Font kind="Button1" text="삭제하기" color="main500" />
         </S.TextWrap>
       </S.Modal>

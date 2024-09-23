@@ -3,6 +3,7 @@ import { GlobalStyle } from "./Styles/GlobalStyle.style";
 import Layout from "./Components/Layout";
 import Suggest from "./Pages/Suggest"
 import SuggestModify from "./Pages/Suggest/Modify";
+import SuggestUpload from "./Pages/Suggest/Upload"
 
 function router() {
   return (
@@ -11,7 +12,8 @@ function router() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/suggest" element={<Suggest />} />
-          <Route path="/suggestModify" element={<SuggestModify/>} />
+          <Route path="/suggestModify" element={<SuggestModify />} />
+          <Route path="/suggestUpload" element={<SuggestUpload />} />
         </Route>
       </Routes>
     </BrowserRouter>
