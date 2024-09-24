@@ -6,7 +6,7 @@ interface SelectState {
 }
 
 const useVoteTypeStore = create<SelectState>((set) => ({
-  selectType: false,
+  selectType: true,
   setSelectType: (value: boolean) => set({ selectType: value }),
 }));
 
