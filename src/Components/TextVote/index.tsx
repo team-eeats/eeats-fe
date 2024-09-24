@@ -21,10 +21,11 @@ const TextVote = ({ date, header, content }: TextVoteType) => {
   const [isIng, setIsIng] = useState<boolean>(false);
   const [isNotVoting, setIsNotVoting] = useState<boolean>(true);
   const [voteArray, setVoteArray] = useState<VoteItem[]>([]);
+  const [random, setRandom] = useState<number>(Math.random() * 150 + 30);
 
   useEffect(() => {
     setVoteArray([
-      { name: "국물떡볶이", targetPercent: 57, percent: 0 },
+      { name: "국물떡볶이", targetPercent: 100, percent: 0 },
       { name: "국물라볶이", targetPercent: 33, percent: 0 },
       { name: "국물김말이", targetPercent: 10, percent: 0 },
     ]);
@@ -33,8 +34,8 @@ const TextVote = ({ date, header, content }: TextVoteType) => {
 
   useEffect(() => {
     if (isIng) {
-      let increase = 20;
       const intervalId = setInterval(() => {
+        setRandom(Math.random() * 150 + 30);
         setVoteArray((prevArray) => {
           const updatedArray = prevArray.map((item) => {
             if (item.percent < item.targetPercent) {
@@ -52,9 +53,9 @@ const TextVote = ({ date, header, content }: TextVoteType) => {
 
           return updatedArray;
         });
-      }, increase--);
+      }, random);
     }
-  }, [isIng]);
+  }, [isIng, random]);
 
   const handleSelect = (index: number) => {
     if (isNotVoting) {
