@@ -17,6 +17,7 @@ import { CompletePhotoVote } from "./Components/CompletePhotoVote";
 import { Header } from "./Components/Header";
 import LoginPage from "./page/loginPage";
 import VotePage from "./page/votePage";
+import { NoticePage } from "./Pages/NoticePage";
 
 function router() {
   return (
@@ -27,6 +28,9 @@ function router() {
           <Route path="/suggest" element={<Suggest />} />
           <Route path="/suggestModify" element={<SuggestModify />} />
           <Route path="/suggestUpload" element={<SuggestUpload />} />
+        </Route>
+        <Route element={<Layout />}>
+          <Route path="/notice" element={<NoticePage />} />
         </Route>
         <Route path="/donut" element={<DonutGraph />} />
         <Route path="/photoVote" element={<PhotoVote />} />
