@@ -5,25 +5,25 @@ import AllergyTags from "../AllergyTags";
 
 export const ChooseAllergy = () => {
   const Allergy = [
-    { name: "알류" },
-    { name: "우유" },
-    { name: "메밀" },
-    { name: "땅콩" },
-    { name: "대두" },
-    { name: "밀" },
-    { name: "잣" },
-    { name: "호두" },
-    { name: "게" },
-    { name: "새우" },
-    { name: "오징어" },
-    { name: "고등어" },
-    { name: "조개류" },
-    { name: "복숭아" },
-    { name: "토마토" },
-    { name: "닭고기" },
-    { name: "돼지고기" },
-    { name: "쇠고기" },
-    { name: "아황산류" },
+    "알류",
+    "우유",
+    "메밀",
+    "땅콩",
+    "대두",
+    "밀",
+    "잣",
+    "호두",
+    "게",
+    "새우",
+    "오징어",
+    "고등어",
+    "조개류",
+    "복숭아",
+    "토마토",
+    "닭고기",
+    "돼지고기",
+    "쇠고기",
+    "아황산류",
   ];
   return (
     <S.Container>
@@ -38,7 +38,7 @@ export const ChooseAllergy = () => {
         </S.TextWrapper>
         <S.AllergyWrapper>
           {Allergy.map((element, index) => (
-            <AllergyTags food={element.name} key={index} />
+            <AllergyTags food={element} key={index} />
           ))}
         </S.AllergyWrapper>
         <S.Div>

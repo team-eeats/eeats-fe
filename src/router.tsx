@@ -46,7 +46,7 @@ function router() {
         <Route path="/Header" element={<Header />} />
         <Route path="/tab" element={<TabBar />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<VotePage />} />
+        <Route path="/vote" element={<VotePage />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/choose" element={<ChooseAllergy />} />
       </Routes>
