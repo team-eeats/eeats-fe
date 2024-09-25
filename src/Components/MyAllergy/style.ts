@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Color } from "../../Styles/Color";
 
 export const MyAllergy = styled.div`
-  width: auto;
+  width: fit-content;
   height: auto;
   background-color: ${Color.main300};
   border-radius: 16px;
