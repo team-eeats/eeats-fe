@@ -20,7 +20,7 @@ const MealTime = () => {
       <S.Container>
         {Meals.map((meal) => (
           <S.Btn
-            key={meal} // key 추가
+            key={meal}
             isSelected={selectedMeal === meal}
             onClick={() => handleMealClick(meal)}
           >
@@ -32,7 +32,6 @@ const MealTime = () => {
           </S.Btn>
         ))}
       </S.Container>
-      {/* 선택한 식사에 따라 MealList 렌더링 */}
       <MealList selectedMeal={selectedMeal} />
     </>
   );

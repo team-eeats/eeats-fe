@@ -12,7 +12,6 @@ interface MealListProps {
  * @returns 선택한 급식을 보여주는 컴포넌트
  */
 const MealList = ({ selectedMeal }: MealListProps) => {
-  // 급식 데이터를 배열로 정의
   const meals = [
     {
       name: "아침밥",
@@ -34,10 +33,9 @@ const MealList = ({ selectedMeal }: MealListProps) => {
     },
   ];
 
-  // 선택된 식사에 해당하는 데이터를 필터링
   const meal = meals.find((meal) => meal.name === selectedMeal);
 
-  if (!meal) return null; // 선택한 식사가 없을 경우 아무것도 렌더링하지 않음
+  if (!meal) return null;
 
   return (
     <S.Container>
@@ -47,9 +45,7 @@ const MealList = ({ selectedMeal }: MealListProps) => {
           <Font key={idx} text={item} kind="Body1" color="gray800" />
         ))}
       </S.MealList>
-      <div>
-        <Font text={meal.kcal} kind="Caption2" color="gray400" />
-      </div>
+      <Font text={meal.kcal} kind="Caption2" color="gray400" />
     </S.Container>
   );
 };
