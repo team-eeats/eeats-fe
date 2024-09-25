@@ -1,9 +1,9 @@
-import { useState } from "react";
 import * as S from "./style";
 import { Font } from "../../Styles/Font";
+import useVoteTypeStore from "../../store/useVoteTypeStore";
 
 const VoteType = () => {
-  const [selectType, setSelectType] = useState<boolean>(true);
+  const { selectType, setSelectType } = useVoteTypeStore();
 
   const handleSelectType = (type: string) => {
     if (type === "ing") {

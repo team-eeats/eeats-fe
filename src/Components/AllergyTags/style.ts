@@ -6,13 +6,14 @@ interface AllergyTagsType {
 }
 
 export const AllergyTags = styled.div<AllergyTagsType>`
-  width: 79px;
   height: 41px;
+  padding: 10px 16px;
   background-color: ${(prop) => (prop.select ? Color.main300 : Color.gray0)};
   border-radius: 20px;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   user-select: none;
+  white-space: nowrap;
 `;
