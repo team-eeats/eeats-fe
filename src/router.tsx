@@ -19,6 +19,8 @@ import LoginPage from "./page/loginPage";
 import VotePage from "./page/votePage";
 import { NoticePage } from "./Pages/NoticePage";
 import { MySuggestPage } from "./Pages/MySuggestPage";
+import { Logout } from "./Components/Logout";
+import { ChooseAllergy } from "./Components/ChooseAllergy";
 
 function router() {
   return (
@@ -45,6 +47,8 @@ function router() {
         <Route path="/tab" element={<TabBar />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/vote" element={<VotePage />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="/choose" element={<ChooseAllergy />} />
       </Routes>
     </BrowserRouter>
   );
