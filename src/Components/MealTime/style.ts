@@ -8,8 +8,8 @@ interface BtnProps {
 export const Container = styled.main`
   display: flex;
   flex-direction: column;
-  width: 120px;
-  height: auto;
+  width: 6vw;
+  height: 45vh;
 `;
 
 export const Btn = styled.button<BtnProps>`
