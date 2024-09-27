@@ -1,7 +1,6 @@
 import * as S from "./style";
 import { useEffect, useState } from "react";
 import nonCheck from "../../assets/img/SVG/nonCheck.svg";
-import check from "../../assets/img/SVG/check.svg";
 import { Font } from "../../Styles/Font";
 
 interface TextVoteType {
@@ -18,10 +17,8 @@ interface VoteItem {
 
 const TextVote = ({ date, header, content }: TextVoteType) => {
   const [isSelect, setIsSelect] = useState<number>(-1);
-  const [isIng, setIsIng] = useState<boolean>(false);
   const [isNotVoting, setIsNotVoting] = useState<boolean>(true);
   const [voteArray, setVoteArray] = useState<VoteItem[]>([]);
-  const [random, setRandom] = useState<number>(Math.random() * 150 + 30);
 
   useEffect(() => {
     setVoteArray([
@@ -29,13 +26,11 @@ const TextVote = ({ date, header, content }: TextVoteType) => {
       { name: "국물라볶이", targetPercent: 33, percent: 0 },
       { name: "국물김말이", targetPercent: 10, percent: 0 },
     ]);
-    setIsIng(true);
   }, []);
 
   useEffect(() => {
-    if (isIng) {
+    if (!isNotVoting) {
       const intervalId = setInterval(() => {
-        setRandom(Math.random() * 150 + 30);
         setVoteArray((prevArray) => {
           const updatedArray = prevArray.map((item) => {
             if (item.percent < item.targetPercent) {
@@ -53,9 +48,10 @@ const TextVote = ({ date, header, content }: TextVoteType) => {
 
           return updatedArray;
         });
-      }, random);
+      }, 12);
+      return () => clearInterval(intervalId);
     }
-  }, [isIng, random]);
+  }, [isNotVoting]);
 
   const handleSelect = (index: number) => {
     if (isNotVoting) {
@@ -81,7 +77,6 @@ const TextVote = ({ date, header, content }: TextVoteType) => {
         {voteArray?.map(({ name, percent }, index) => {
           const isSelected = isSelect === index;
           const textColor = isSelected ? "main400" : "black";
-          const imgSrc = isSelected ? check : nonCheck;
 
           return (
             <S.VoteArray
@@ -90,8 +85,10 @@ const TextVote = ({ date, header, content }: TextVoteType) => {
               onClick={() => handleSelect(index)}
             >
               <Font text={name} kind="Body1" color={textColor} />
-              <Font text={`${percent}%`} kind="Heading4" color={textColor} />
-              {!isIng && <S.CheckImg src={imgSrc} alt="" />}
+              {!isNotVoting && (
+                <Font text={`${percent}%`} kind="Heading4" color={textColor} />
+              )}
+              {isNotVoting && <S.CheckImg src={nonCheck} alt="" />}
             </S.VoteArray>
           );
         })}
