@@ -29,7 +29,7 @@ const TabValue = [
     option: "건의",
     blackIcon: <SuggestIcon />,
     whiteIcon: <SuggestWhiteIcon />,
-    onClick: "/mysuggest",
+    onClick: "/suggest",
   },
 ];
 
