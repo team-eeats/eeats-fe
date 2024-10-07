@@ -40,9 +40,18 @@ export const MenuPhoto = styled.img<{ vote: boolean }>`
   position: ${({ vote }) => (vote ? "relative" : "none")};
   width: 200px;
   height: 156px;
-  border-radius: 12px;
-  border: ${({ vote }) => (vote ? `4px solid ${Color.main300}` : "none")};
+  border-radius: 8px;
   filter: ${({ vote }) => (vote ? "brightness(50%)" : "none")};
+`;
+
+export const Photo = styled.div<{ vote: boolean }>`
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: ${({ vote }) => (vote ? `4px solid ${Color.main300}` : "none")};
 `;
 
 export const Vote = styled.img<{ vote: boolean }>`

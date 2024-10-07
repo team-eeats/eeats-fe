@@ -37,11 +37,13 @@ export const PhotoVote = () => {
       <S.MapWrapper>
         {ex.map((element, index) => (
           <S.VoteWrapper key={index}>
-            <S.MenuPhoto
-              src={element.photo}
-              vote={vote === index}
-              onClick={() => ClickVote(index)}
-            />
+            <S.Photo vote={vote === index}>
+              <S.MenuPhoto
+                src={element.photo}
+                vote={vote === index}
+                onClick={() => ClickVote(index)}
+              />
+            </S.Photo>
             <S.Vote
               src={VoteComplete}
               vote={vote === index}
