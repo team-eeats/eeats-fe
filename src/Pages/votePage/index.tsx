@@ -1,3 +1,4 @@
+import { CompletePhotoVote } from "../../Components/CompletePhotoVote";
 import { PhotoVote } from "../../Components/PhotoVote";
 import TextVote from "../../Components/TextVote";
 import VoteType from "../../Components/VoteType";
@@ -16,7 +17,7 @@ const VotePage = () => {
         </>
       ) : (
         <>
-          <PhotoVote />
+          <CompletePhotoVote />
           <TextVote
             key="2"
             date="2007-11-05"
