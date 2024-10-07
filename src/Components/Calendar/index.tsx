@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight } from "../../assets/img/SVG";
 
 const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
-const Calendar = () => {
+const Calendar = ({onDateSelect, }: any) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -49,6 +49,11 @@ const Calendar = () => {
   const isPastDate = (date: Date) => date < new Date();
   const isCurrentMonth = (date: Date) => date.getMonth() === currentDate.getMonth();
   const isSelectedDate = (date: Date) => selectedDate?.toDateString() === date.toDateString();
+  
+  const handleDateClick = (date: Date) => {
+    setSelectedDate(date);
+    onDateSelect(date);
+  };
 
   const { startDay, endDay } = getStartAndEndDays();
   const weeks = groupDatesByWeek(startDay, endDay);
@@ -76,15 +81,15 @@ const Calendar = () => {
           <S.Week key={weekIndex}>
             {week.map((date, dateIndex) => (
               <S.Date
-                key={dateIndex}
-                onClick={() => setSelectedDate(date)}
+                key={dateIndex}                
+                onClick={() => handleDateClick(date)}
                 isToday={isToday(date)}
                 isPast={isPastDate(date)}
                 isCurrentMonth={isCurrentMonth(date)}
                 isSelected={isSelectedDate(date)}
               >
                 {date.getDate().toString()}
-              </S.Date>
+              </S.Date>              
             ))}
           </S.Week>
         ))}
