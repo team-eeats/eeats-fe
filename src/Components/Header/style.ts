@@ -10,6 +10,7 @@ export const Container = styled.div`
 export const Logo = styled.img`
   width: 120px;
   height: 52px;
+  cursor: pointer;
 `;
 
 export const IconWrapper = styled.div`
