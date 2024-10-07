@@ -3,6 +3,7 @@ import {Color} from "../../Styles/Color"
 
 export const Container = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 export const Eyes = styled.img`
@@ -13,7 +14,7 @@ export const Eyes = styled.img`
 
 export const Input = styled.input`
   font-size: 18px;
-  width: 600px;
+  width: 100%;
   height: 56px;
   border: none;
   border-radius: 12px;

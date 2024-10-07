@@ -22,7 +22,7 @@ const TextVote = ({ date, header, content }: TextVoteType) => {
 
   useEffect(() => {
     setVoteArray([
-      { name: "국물떡볶이", targetPercent: 100, percent: 0 },
+      { name: "국물떡볶이", targetPercent: 57, percent: 0 },
       { name: "국물라볶이", targetPercent: 33, percent: 0 },
       { name: "국물김말이", targetPercent: 10, percent: 0 },
     ]);
