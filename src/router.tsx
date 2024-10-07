@@ -28,13 +28,6 @@ function router() {
           <Route path="/notice" element={<NoticePage />} />
           <Route path="/mysuggest" element={<MySuggestPage />} />
         </Route>
-        <Route path="/donut" element={<DonutGraph />} />
-        <Route path="/photoVote" element={<PhotoVote />} />
-        <Route path="/CompletePhotoVote" element={<CompletePhotoVote />} />
-        <Route path="/AllergyNotification" element={<AllergyNotification />} />
-        <Route path="/NoAllergy" element={<NoAllergy />} />
-        <Route path="/Header" element={<Header />} />
-        <Route path="/tab" element={<TabBar />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/vote" element={<VotePage />} />
       </Routes>
