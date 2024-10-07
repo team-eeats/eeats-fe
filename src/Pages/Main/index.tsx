@@ -1,3 +1,4 @@
+import { useState } from "react";
 import * as S from "./style";
 import AllergyNotification from "../../Components/AllergyNotification/AllergyNotification";
 import Announcement from "../../Components/Announcement/Announcement";
@@ -8,6 +9,25 @@ import Calendar from "../../Components/Calendar";
 import WidthMeal from "../../Components/WidthMeal";
 
 const Main = () => {
+  const [selectedDate, setSelectedDate] = useState<Date | null>();
+
+  const handleDateSelect = (date: Date) => {
+    setSelectedDate(date);
+  };
+
+  const formatSelectedDate = () => {
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+
+    if (!selectedDate) return `${month}월 ${day}일`;
+
+    const selectedMonth = selectedDate.getMonth() + 1;
+    const selectedDay = selectedDate.getDate();
+
+    return `${selectedMonth}월 ${selectedDay}일`;
+  };
+  
   return (
     <>
       <S.Container>
@@ -42,9 +62,13 @@ const Main = () => {
             />
           </S.CalendarTitle>
           <S.CalenderMenu>
-            <Calendar />
+            <Calendar onDateSelect={handleDateSelect} />
             <S.NextMeal>
-              <Font text="X월 XX일의 급식" kind="Heading3" color="gray800" />
+              <Font
+                text={`${formatSelectedDate()}의 급식`}
+                kind="Heading3"
+                color="gray800"
+              />
               <WidthMeal />
             </S.NextMeal>
           </S.CalenderMenu>
