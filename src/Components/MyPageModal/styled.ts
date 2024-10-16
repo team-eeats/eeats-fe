@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Color } from "../../Styles/Color";
 
 export const Container = styled.div`
+  position: absolute;
+  right: 15vw;
   width: 380px;
   height: 370px;
   background-color: ${Color.white};

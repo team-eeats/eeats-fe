@@ -1,7 +1,11 @@
 import { Font } from "../../Styles/Font";
 import * as S from "./styled";
 
-export const AlarmModal = () => {
+type AlarmModalProps = {
+  onClose: () => void;
+};
+
+export const AlarmModal: React.FC<AlarmModalProps> = () => {
   return (
     <S.Container>
       <Font text="알림" kind="SubTitle2" />

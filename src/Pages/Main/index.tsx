@@ -27,7 +27,7 @@ const Main = () => {
 
     return `${selectedMonth}월 ${selectedDay}일`;
   };
-  
+
   return (
     <>
       <S.Container>

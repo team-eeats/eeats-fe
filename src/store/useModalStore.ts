@@ -1,13 +1,17 @@
 import { create } from "zustand";
 
-type Store = {
-  show: boolean;
-  toggleModal: () => void;
+type ModalStore = {
+  modalType: string | null;
+  isOpen: boolean;
+  openModal: (type: string) => void;
+  closeModal: () => void;
 };
 
-const useModalStore = create<Store>()((set) => ({
-  show: false,
-  toggleModal: () => set((state) => ({ show: !state.show })),
+const useModalStore = create<ModalStore>((set) => ({
+  modalType: null,
+  isOpen: false,
+  openModal: (type: string) => set({ modalType: type, isOpen: true }),
+  closeModal: () => set({ modalType: null, isOpen: false }),
 }));
 
 export default useModalStore;

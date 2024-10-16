@@ -6,7 +6,11 @@ import Suggest from "../../Assets/img/SVG/suggest.svg";
 import Logout from "../../Assets/img/SVG/Logout.svg";
 import { MyAllergy } from "../MyAllergy";
 
-export const MyPageModal = () => {
+type MyPageModalProps = {
+  onClose: () => void;
+};
+
+export const MyPageModal: React.FC<MyPageModalProps> = () => {
   const List = [
     { icon: Notice, title: "공지사항" },
     { icon: Medicine, title: "내가 갖고 있는 알레르기 변경" },
