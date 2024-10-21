@@ -3,7 +3,11 @@ import CheckCancelButton from "../CheckCancelButton";
 import Input from "../Input/Input";
 import * as S from "./style";
 
-export const NicknameChange = () => {
+type NicknameChangeProps = {
+  onClose: () => void;
+};
+
+export const NicknameChange: React.FC<NicknameChangeProps> = () => {
   return (
     <S.Container>
       <Font text="변경할 닉네임을 입력해주세요" kind="Heading3" color="black" />

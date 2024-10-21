@@ -52,3 +52,11 @@ export const Icon = styled.img`
   width: 24px;
   height: 24px;
 `;
+
+export const Div = styled.div`
+  cursor: pointer;
+`;
+
+export const Wrapper = styled.div`
+  position: relative;
+`;
