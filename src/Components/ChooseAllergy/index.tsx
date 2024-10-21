@@ -3,7 +3,11 @@ import * as S from "./style";
 import CheckCancelButton from "../CheckCancelButton";
 import AllergyTags from "../AllergyTags";
 
-export const ChooseAllergy = () => {
+type ChooseAllergyProps = {
+  onClose: () => void;
+};
+
+export const ChooseAllergy: React.FC<ChooseAllergyProps> = () => {
   const Allergy = [
     "알류",
     "우유",
