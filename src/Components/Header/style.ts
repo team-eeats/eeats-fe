@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const Wrapper = styled.div`
+  position: relative;
+`;
+
 export const Container = styled.div`
   height: 70px;
   display: flex;
@@ -10,6 +14,7 @@ export const Container = styled.div`
 export const Logo = styled.img`
   width: 120px;
   height: 52px;
+  cursor: pointer;
 `;
 
 export const IconWrapper = styled.div`

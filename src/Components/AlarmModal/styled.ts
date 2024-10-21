@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Color } from "../../Styles/Color";
 
 export const Container = styled.div`
+  position: absolute;
+  right: 16vw;
   width: 380px;
   height: 311px;
   display: flex;
