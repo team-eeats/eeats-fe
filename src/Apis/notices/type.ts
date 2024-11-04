@@ -7,3 +7,10 @@ export type Notices = {
   title: string;
   createdAt: string;
 };
+
+export type NoticeDetailResponse = {
+  id: string;
+  title: string;
+  content: string;
+  createdAt: string;
+};
