@@ -1,6 +1,6 @@
 import * as S from "./style";
 import { HomeIcon, HomeWhiteIcon, VoteIcon, VoteWhiteIcon, SuggestIcon, SuggestWhiteIcon } from "../../Assets/img/SVG/index";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navigation from "./Navigation";
 import { useNavigate } from "react-router-dom";
 import useNavigation from "../../store/useNavigation";
@@ -46,20 +46,25 @@ const TabBar = () => {
   const { click, select } = useNavigation();
 
   const handleClick = (name: SelectState) => {
-    click(name);
-
-    switch (select) {
-      case "Home":
-        navigate("/main");
-        break;
-      case "Suggest":
-        navigate("/suggest");
-        break;
-      case "Vote":
-        navigate("/vote");
-        break;
-    }
+    click(name)
+    setSelectOption(select)
   };
+
+  useEffect(() => {
+    if (selectOption) {
+      switch (select) {
+        case "Home":
+          navigate("/main");
+          break;
+        case "Suggest":
+          navigate("/suggest");
+          break;
+        case "Vote":
+          navigate("/vote");
+          break;
+      }
+    }
+  }, [selectOption, navigate])
 
   return (
     <S.NavigationWrap
@@ -75,7 +80,6 @@ const TabBar = () => {
               whiteIcon={whiteIcon}
               selected={select === name}
               onClick={() => {
-                setSelectOption(name);
                 handleClick(name);
               }}
             />
