@@ -8,25 +8,44 @@ import { MyAllergy } from "../MyAllergy";
 import { useModal } from "../../Hook/useModal";
 import { NicknameChange } from "../NicknameChange";
 import { ChooseAllergy } from "../ChooseAllergy";
+import { useNavigate } from "react-router-dom";
+import { UserLayout } from "../Logout/UserLayout";
+import { useEffect } from "react";
 
 type MyPageModalProps = {
   onClose: () => void;
 };
 
 export const MyPageModal: React.FC<MyPageModalProps> = () => {
+  const navigation = useNavigate()
   const { isOpen: changeNameOpen, onToggle: toggleChangeName } =
     useModal("changeName");
   const { isOpen: changeAllergy, onToggle: toggleChangeAllergy } =
     useModal("changeAllergy");
+  const { isOpen: logout, onToggle: toggleLogout } = useModal("toggleLogout")
+
   const List = [
-    { icon: Notice, title: "공지사항" },
+    {
+      icon: Notice,
+      title: "공지사항",
+      onclick:  navigation("/notice")
+    },
     {
       icon: Medicine,
       title: "내가 갖고 있는 알레르기 변경",
       onclick: toggleChangeAllergy,
     },
-    { icon: Suggest, title: "내가 쓴 건의 보기" },
+    {
+      icon: Suggest,
+      title: "내가 쓴 건의 보기",
+      onclick: navigation("/mysuggest")
+    },
   ];
+
+  useEffect(() => (
+    console.log(logout)
+  ))
+
   return (
     <S.Wrapper>
       <S.Container>
@@ -52,13 +71,14 @@ export const MyPageModal: React.FC<MyPageModalProps> = () => {
           ))}
         </S.ListWrapper>
         <S.Line></S.Line>
-        <S.List>
-          <S.Icon src={Logout} />
+        <S.List onClick={toggleLogout}>
+          <S.Icon src={Logout}  />
           <Font text="로그아웃" />
         </S.List>
       </S.Container>
       {changeNameOpen && <NicknameChange onClose={toggleChangeName} />}
       {changeAllergy && <ChooseAllergy onClose={toggleChangeAllergy} />}
+      {logout && <UserLayout onClose={toggleLogout} />}
     </S.Wrapper>
   );
 };

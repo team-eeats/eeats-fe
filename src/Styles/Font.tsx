@@ -5,16 +5,18 @@ interface FontPropsType {
   text?: string;
   kind?: keyof typeof fonts;
   color?: keyof typeof Color;
+  onClick?: () => void
 }
 
 export const Font = ({
   text,
   kind = "",
   color: textColor = "black",
+  onClick
 }: FontPropsType) => {
   const textColorStyle = textColor ? { color: Color[textColor] } : {};
 
-  return <p style={{ ...fonts[kind], ...textColorStyle }}>{text}</p>;
+  return <p onClick={onClick} style={{ ...fonts[kind], ...textColorStyle }}>{text}</p>;
 };
 
 const fonts: { [key: string]: React.CSSProperties } = {

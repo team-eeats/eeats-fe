@@ -10,6 +10,7 @@ export const Container = styled.div`
   border-radius: 12px;
   border: 1px solid ${Color.gray50};
   padding: 24px 20px;
+  z-index: 100;
 `;
 
 export const TopWrapper = styled.div`

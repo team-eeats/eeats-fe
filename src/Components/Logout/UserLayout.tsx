@@ -2,7 +2,11 @@ import { Font } from "../../Styles/Font";
 import * as S from "./style";
 import CheckCancelButton from "../CheckCancelButton";
 
-export const Logout = () => {
+type LogoutProps = {
+  onClose: () => void
+}
+
+export const UserLayout: React.FC<LogoutProps> = () => {
   return (
     <S.Container>
       <S.Content>
