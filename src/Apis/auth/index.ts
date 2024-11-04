@@ -1,9 +1,5 @@
 import { instance } from "../axios";
-import {
-  LoginRequest,
-  LoginResponse,
-  ReissueResponse,
-} from "./type";
+import { LoginRequest, LoginResponse, ReissueResponse } from "./type";
 
 const router = "/auth";
 
@@ -16,5 +12,9 @@ export const Reissue = async (refreshToken: string) => {
 };
 
 export const Login = async (data: LoginRequest) => {
-  return await instance.post<LoginResponse>(`${router}/login`, data);
+  return await instance.post<LoginResponse>(`${router}/user-login`, data);
+};
+
+export const AdminLogin = async (data: LoginRequest) => {
+  return await instance.post<LoginResponse>(`${router}/admin-login`, data);
 };
