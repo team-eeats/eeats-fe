@@ -1,15 +1,21 @@
 import * as S from "./style";
-import { HomeIcon } from "../../Assets/img/SVG/HomeIcon";
-import { HomeWhiteIcon } from "../../Assets/img/SVG/HomeWhiteIcon";
-import { VoteIcon } from "../../Assets/img/SVG/VoteIcon";
-import { VoteWhiteIcon } from "../../Assets/img/SVG/VoteWhiteIcon";
-import { SuggestIcon } from "../../Assets/img/SVG/SuggestIcon";
-import { SuggestWhiteIcon } from "../../Assets/img/SVG/SuggestWhiteIcon";
+import { HomeIcon, HomeWhiteIcon, VoteIcon, VoteWhiteIcon, SuggestIcon, SuggestWhiteIcon } from "../../Assets/img/SVG/index";
 import { useState } from "react";
 import Navigation from "./Navigation";
 import { useNavigate } from "react-router-dom";
+import useNavigation from "../../store/useNavigation";
 
-const TabValue = [
+type SelectState = "Home" | "Vote" | "Suggest";
+
+interface PropsType {
+  name: SelectState;
+  option: string;
+  blackIcon: JSX.Element;
+  whiteIcon: JSX.Element;
+  onClick: string;
+}
+
+const TabValue: PropsType[] = [
   {
     name: "Home",
     option: "홈",
@@ -35,11 +41,24 @@ const TabValue = [
 
 const TabBar = () => {
   const [isHover, setIsHover] = useState<boolean>(false);
-  const [selectIndex, setSelectIndex] = useState<number>(0);
+  const [selectOption, setSelectOption] = useState<string>("Home");
   const navigate = useNavigate();
+  const { click, select } = useNavigation();
 
-  const handleClick = (path: string) => {
-    navigate(path);
+  const handleClick = (name: SelectState) => {
+    click(name);
+
+    switch (select) {
+      case "Home":
+        navigate("/main");
+        break;
+      case "Suggest":
+        navigate("/suggest");
+        break;
+      case "Vote":
+        navigate("/vote");
+        break;
+    }
   };
 
   return (
@@ -47,23 +66,22 @@ const TabBar = () => {
       onMouseOver={() => setIsHover(true)}
       onMouseOut={() => setIsHover(false)}
     >
-      {TabValue.map(({ option, blackIcon, whiteIcon, onClick }, index) => (
-        <div>
+      {TabValue.map(({ name, option, blackIcon, whiteIcon }) => (
+        <div key={name}>
           {isHover ? (
             <Navigation
-              key={index}
               option={option}
               blackIcon={blackIcon}
               whiteIcon={whiteIcon}
-              selected={selectIndex === index}
+              selected={select === name}
               onClick={() => {
-                setSelectIndex(index);
-                handleClick(onClick);
+                setSelectOption(name);
+                handleClick(name);
               }}
             />
           ) : (
             <S.LineWrap>
-              <S.Line selected={selectIndex === index}></S.Line>
+              <S.Line selected={selectOption === name}></S.Line>
             </S.LineWrap>
           )}
         </div>

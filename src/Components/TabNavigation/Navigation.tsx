@@ -1,16 +1,16 @@
-import React from 'react';
-import * as S from "./style";
+import React from "react";
+import * as S from "./style"
 import { Font } from "../../Styles/Font";
 
-interface PropsType {
-  option?: string;
-  blackIcon?: React.ReactNode;
-  whiteIcon?: React.ReactNode;
-  selected?: boolean;
-  onClick?: () => void;
+interface NavigationProps {
+  option: string;
+  blackIcon: JSX.Element;
+  whiteIcon: JSX.Element;
+  selected: boolean;
+  onClick: () => void;
 }
 
-const Navigation: React.FC<PropsType> = ({ option, blackIcon, whiteIcon, selected = false, onClick }) => {
+const Navigation: React.FC<NavigationProps> = ({ option, blackIcon, whiteIcon, selected, onClick }) => {
   return (
     <S.Content onClick={onClick} selected={selected}>
       {selected ? whiteIcon : blackIcon}
