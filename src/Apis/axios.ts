@@ -1,14 +1,15 @@
 import axios from "axios";
 import { Cookie } from "../utils/cookie";
+import { Reissue } from "./auth";
 
 export const instance = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: import.meta.env.VITE_APP_BASE_URL,
   timeout: 3000,
 });
 
 instance.interceptors.request.use(
   (res) => {
-    const token = Cookie.get("access_token");
+    const token = Cookie.get("accessToken");
     if (token) res.headers.Authorization = `Bearer ${token}`;
     return res;
   },
@@ -24,5 +25,32 @@ instance.interceptors.response.use(
   },
   (err) => {
     console.log(err);
+
+    const {
+      response: { status },
+    } = err;
+    if (status === 403 || status === 401) {
+      const token = Cookie.get("refreshToken");
+      Reissue(token)
+        .then((res: any) => {
+          Cookie.set("accessToken", res.data.accessToken);
+          Cookie.set("refreshToken", res.data.refreshToken);
+          Cookie.set("part", res.data.part);
+        })
+        .catch(() => {
+          Cookie.remove("accessToken");
+          Cookie.remove("refreshToken");
+          Cookie.remove("part");
+          if (
+            window.location.href.split("/")[
+              window.location.href.split("/").length - 1
+            ] !== ""
+          ) {
+            window.location.href = "/";
+          }
+        });
+    } else {
+      window.location.href = "/";
+    }
   }
 );

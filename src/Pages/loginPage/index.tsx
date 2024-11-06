@@ -3,22 +3,32 @@ import { Font } from "../../Styles/Font";
 import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button";
 import { useEffect, useState } from "react";
-import useInputStore from "../../store/useInputStore";
 import { useNavigate } from "react-router-dom";
+import { Login } from "../../Apis/auth";
+import { Cookie } from "../../utils/cookie";
 
 const LoginPage = () => {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
   const [buttonActive, setButtonActive] = useState<boolean>(false);
-  const { inputs } = useInputStore();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (inputs["loginText"] && inputs["loginPassword"]) setButtonActive(true);
-    else setButtonActive(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputs["loginText"], inputs["loginPassword"]]);
+    setButtonActive(id.trim() !== "" && password.trim() !== "");
+  }, [id, password]);
 
-  const clickHandle = () => {
-    navigate("/main");
+  const handleLogin = () => {
+    Login({
+      account_id: id,
+      password: password,
+    })
+      .then((res) => {
+        Cookie.set("accessToken", res.data.accessToken);
+        navigate("/main");
+      })
+      .catch(() => {
+        setPassword("");
+      });
   };
 
   return (
@@ -32,10 +42,22 @@ const LoginPage = () => {
         />
       </div>
       <div style={{ gap: "52px" }}>
-        <Input id="loginText" type="text" placeholder="아이디 입력" />
-        <Input id="loginPassword" type="password" placeholder="비밀번호 입력" />
+        <Input
+          id="id"
+          type="text"
+          placeholder="아이디 입력"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+        />
+        <Input
+          id="password"
+          type="password"
+          placeholder="비밀번호 입력"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </div>
-      <Button text="로그인" activate={buttonActive} onClick={clickHandle} />
+      <Button text="로그인" activate={buttonActive} onClick={handleLogin} />
     </S.LoginPageContainer>
   );
 };

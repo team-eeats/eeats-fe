@@ -4,7 +4,7 @@ export type ReissueResponse = {
 };
 
 export type LoginRequest = {
-  accountId: string;
+  account_id: string;
   password: string;
 };
 

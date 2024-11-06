@@ -12,7 +12,7 @@ export const Reissue = async (refreshToken: string) => {
 };
 
 export const Login = async (data: LoginRequest) => {
-  return await instance.post<LoginResponse>(`${router}/user-login`, data);
+  return await instance.post<LoginResponse>(`${router}/login`, data);
 };
 
 export const AdminLogin = async (data: LoginRequest) => {
