@@ -8,9 +8,11 @@ interface InputProps {
   id: string;
   type: string;
   placeholder: string;
+  value?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ id, type, placeholder }: InputProps) => {
+const Input = ({ id, type, placeholder, value, onChange }: InputProps) => {
   const [showPswd, setShowPswd] = useState(false);
   const { inputs, setInput } = useInputStore();
 
@@ -19,7 +21,11 @@ const Input = ({ id, type, placeholder }: InputProps) => {
   };
 
   const handleValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput(id, e.target.value);
+    if (onChange) {
+      onChange(e);
+    } else {
+      setInput(id, e.target.value);
+    }
   };
 
   return (
@@ -28,7 +34,7 @@ const Input = ({ id, type, placeholder }: InputProps) => {
         <S.Input
           type={showPswd && type === "password" ? "text" : type}
           placeholder={placeholder}
-          value={inputs[id] || ""}
+          value={value ?? (inputs[id] || "")}
           onChange={handleValue}
         />
         {type === "password" && (

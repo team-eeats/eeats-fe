@@ -24,7 +24,7 @@ function router() {
           <Route path="/main" element={<Main />} />
           <Route path="/vote" element={<VotePage />} />
         </Route>
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );
