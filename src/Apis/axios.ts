@@ -35,12 +35,10 @@ instance.interceptors.response.use(
         .then((res: any) => {
           Cookie.set("accessToken", res.data.accessToken);
           Cookie.set("refreshToken", res.data.refreshToken);
-          Cookie.set("part", res.data.part);
         })
         .catch(() => {
           Cookie.remove("accessToken");
           Cookie.remove("refreshToken");
-          Cookie.remove("part");
           if (
             window.location.href.split("/")[
               window.location.href.split("/").length - 1
