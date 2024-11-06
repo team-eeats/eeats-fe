@@ -24,6 +24,7 @@ const LoginPage = () => {
     })
       .then((res) => {
         Cookie.set("accessToken", res.data.accessToken);
+        Cookie.set("refreshToken", res.data.refreshToken);
         navigate("/main");
       })
       .catch(() => {
