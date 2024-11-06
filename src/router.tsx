@@ -1,6 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { GlobalStyle } from "./Styles/GlobalStyle.style";
-import Layout from "./Components/Layout";
 import Suggest from "./Pages/Suggest";
 import SuggestModify from "./Pages/Suggest/Modify";
 import SuggestUpload from "./Pages/Suggest/Upload";
@@ -9,12 +8,14 @@ import VotePage from "./Pages/votePage";
 import { NoticePage } from "./Pages/NoticePage";
 import { MySuggestPage } from "./Pages/MySuggestPage";
 import Main from "./Pages/Main";
+import Layout from "./Components/Layout";
 
 function router() {
   return (
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
+        <Route path="/" element={<LoginPage />} />
         <Route element={<Layout />}>
           <Route path="/suggest" element={<Suggest />} />
           <Route path="/suggestModify" element={<SuggestModify />} />
@@ -24,7 +25,6 @@ function router() {
           <Route path="/main" element={<Main />} />
           <Route path="/vote" element={<VotePage />} />
         </Route>
-        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

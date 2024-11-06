@@ -9,7 +9,6 @@ align-items: center;
 `
 
 export const Content = styled.div`
-position: relative;
 width: 1040px;
 display: flex;
 flex-direction: column;

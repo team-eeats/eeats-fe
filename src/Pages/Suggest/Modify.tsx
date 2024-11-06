@@ -2,8 +2,11 @@ import { useState } from 'react';
 import * as S from './style'
 import { Font } from '../../Styles/Font';
 import Button from '../../Components/Button';
+import { useNavigate } from 'react-router-dom';
 
 const Modify = () => {
+  const navigation = useNavigate()
+
   const [inputCount, setInputCount] = useState<number>(0)
   const [excessLimit, setExcessLimit] = useState<boolean>(false)
 
@@ -38,7 +41,7 @@ const Modify = () => {
             </S.LabelWrap>
           </S.Write>
         </S.ContentBox>
-        <Button text="수정하기" activate onClick={() => { }} />
+        <Button text="수정하기" activate onClick={() => navigation("/suggest")} />
       </S.SubmitContent>
     </S.Container>
   )
