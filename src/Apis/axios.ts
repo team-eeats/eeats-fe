@@ -7,10 +7,15 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-  (res) => {
-    const token = Cookie.get("accessToken");
-    if (token) res.headers.Authorization = `Bearer ${token}`;
-    return res;
+  (config) => {
+    if (config.url === "/meals") {
+      // 요청 URL이 "/"일 때
+      delete config.headers.Authorization;
+    } else {
+      const token = Cookie.get("accessToken");
+      if (token) config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
   },
   (err) => {
     alert("오류가 발생했습니다");

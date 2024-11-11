@@ -65,11 +65,21 @@ const MealList = ({ selectedMeal }: MealListProps) => {
 
   if (!meal) return null;
 
+  const removeParenthesis = (menu: string) => {
+    return menu
+      .replace(/\s*\(.*?\)/g, "") // 괄호와 그 안의 내용을 제거
+      .split(",") // 쉼표로 항목을 분리
+      .map((item) => item.trim()) // 각 항목 앞뒤 공백 제거
+      .join("\n"); // 항목을 줄바꿈으로 이어줌
+  };
+
+  const formattedMenu = removeParenthesis(meal.menu);
+
   return (
     <S.Container>
       <img src={meal.image} alt={meal.name} />
-      <S.MealList>
-        <Font text={meal.menu} kind="Body1" color="gray800" />
+      <S.MealList style={{ whiteSpace: "pre-line" }}>
+        <Font text={formattedMenu} kind="Body1" color="gray800" />
       </S.MealList>
       <Font text={meal.kcal} kind="Caption2" color="gray400" />
     </S.Container>
