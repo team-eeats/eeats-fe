@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Cookie } from "../utils/cookie";
-import { Reissue } from "./auth";
 
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_URL,
@@ -8,10 +7,15 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-  (res) => {
-    const token = Cookie.get("accessToken");
-    if (token) res.headers.Authorization = `Bearer ${token}`;
-    return res;
+  (config) => {
+    if (config.url === "/meals") {
+      // 요청 URL이 "/"일 때
+      delete config.headers.Authorization;
+    } else {
+      const token = Cookie.get("accessToken");
+      if (token) config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
   },
   (err) => {
     alert("오류가 발생했습니다");
@@ -25,30 +29,5 @@ instance.interceptors.response.use(
   },
   (err) => {
     console.log(err);
-
-    const {
-      response: { status },
-    } = err;
-    if (status === 403 || status === 401) {
-      const token = Cookie.get("refreshToken");
-      Reissue(token)
-        .then((res: any) => {
-          Cookie.set("accessToken", res.data.accessToken);
-          Cookie.set("refreshToken", res.data.refreshToken);
-        })
-        .catch(() => {
-          Cookie.remove("accessToken");
-          Cookie.remove("refreshToken");
-          if (
-            window.location.href.split("/")[
-              window.location.href.split("/").length - 1
-            ] !== ""
-          ) {
-            window.location.href = "/";
-          }
-        });
-    } else {
-      window.location.href = "/";
-    }
   }
 );
