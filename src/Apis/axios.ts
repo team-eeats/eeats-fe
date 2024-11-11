@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Cookie } from "../utils/cookie";
-import { Reissue } from "./auth";
 
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_URL,
@@ -25,30 +24,5 @@ instance.interceptors.response.use(
   },
   (err) => {
     console.log(err);
-
-    const {
-      response: { status },
-    } = err;
-    if (status === 403 || status === 401) {
-      const token = Cookie.get("refreshToken");
-      Reissue(token)
-        .then((res: any) => {
-          Cookie.set("accessToken", res.data.accessToken);
-          Cookie.set("refreshToken", res.data.refreshToken);
-        })
-        .catch(() => {
-          Cookie.remove("accessToken");
-          Cookie.remove("refreshToken");
-          if (
-            window.location.href.split("/")[
-              window.location.href.split("/").length - 1
-            ] !== ""
-          ) {
-            window.location.href = "/";
-          }
-        });
-    } else {
-      window.location.href = "/";
-    }
   }
 );
