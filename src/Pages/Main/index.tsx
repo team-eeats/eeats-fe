@@ -1,6 +1,5 @@
 import { useState } from "react";
 import * as S from "./style";
-import AllergyNotification from "../../Components/AllergyNotification/AllergyNotification";
 import Announcement from "../../Components/Announcement/Announcement";
 import MealTime from "../../Components/MealTime";
 import { Font } from "../../Styles/Font";

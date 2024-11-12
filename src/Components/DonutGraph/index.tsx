@@ -8,56 +8,53 @@ import {
   ActiveElement,
 } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Color } from "../../Styles/Color";
 import { Font } from "../../Styles/Font";
-import Crown from "../../assets/img/SVG/Crown.svg";
+import { VoteListResponse } from "../../Apis/polls/type";
+import { VoteList } from "../../Apis/polls";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
-const result = [
-  { menu: "꼬사삭 치킨", percent: 78, king: true },
-  { menu: "국물 떡볶이", percent: 16, king: false },
-  { menu: "청국장", percent: 12, king: false },
-  { menu: "기타", percent: 6, king: false },
-];
 
 const labelColor = ["#FF583B", "#2784FF", "#C707F2", "#959595"];
 
 export default function DonutGraph() {
-  // 클릭된 인덱스를 추적하는 상태값
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [data, setData] = useState<VoteListResponse | null>(null);
+  let TotalVote = 0;
 
-  const defaultColors = ["#FF9B8A", "#959595", "#D2D2D2"]; // 초기 색상
-  const highlightColors = [
-    ["#FF9B8A", "#959595", "#D2D2D2"], // 첫번째 인덱스 클릭 시 색상
-    ["#D2D2D2", "#2784FF", "#959595"], // 두번째 인덱스 클릭 시 색상
-    ["#959595", "#D2D2D2", "#C707F2"], // 세번째 인덱스 클릭 시 색상
-  ];
+  useEffect(() => {
+    const handleVoteList = async () => {
+      try {
+        const response = await VoteList();
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    handleVoteList();
+  }, []);
 
-  const handleClick = (event: ChartEvent, elements: ActiveElement[]) => {
-    if (elements.length > 0) {
-      const clickedIndex = elements[0].index;
-      setSelectedIndex(clickedIndex); // 클릭된 인덱스 저장
-    }
-  };
+  if (data?.polls && data.polls[6]?.options) {
+    TotalVote = data.polls[6].options.reduce(
+      (sum, option) => sum + option.voteCount,
+      0
+    );
+  }
 
-  const Data = {
-    labels: result.map((item) => item.menu),
+  const chartData = {
+    labels: data?.polls[6]?.options.map((option) => option.description),
     datasets: [
       {
-        data: [40, 25, 35],
-        backgroundColor:
-          selectedIndex !== null
-            ? highlightColors[selectedIndex]
-            : defaultColors, // 선택된 인덱스에 따른 색상 변경
+        data: data?.polls[6]?.options.map((option) => option.voteRate),
+        backgroundColor: selectedIndex !== null ? labelColor : "#D2D2D2",
         borderColor: "#FFFFFF",
         borderWidth: 5,
       },
     ],
   };
 
-  const Options = {
+  const options = {
     plugins: {
       tooltip: {
         backgroundColor: "white",
@@ -75,33 +72,38 @@ export default function DonutGraph() {
         },
       },
     },
-    cutout: "65%", // 도넛 차트의 비율
-    onClick: handleClick, // 클릭 이벤트 핸들러 추가
+    cutout: "65%",
+    onClick: (event: ChartEvent, elements: ActiveElement[]) => {
+      if (elements.length > 0) {
+        setSelectedIndex(elements[0].index);
+      }
+    },
+    layout: {
+      padding: 8, // 그래프 주변 여백 추가
+    },
   };
 
   return (
     <S.Container>
       <S.DoughnutContent>
         <S.Hide></S.Hide>
-        <Doughnut data={Data} options={Options}></Doughnut>
+        <Doughnut data={chartData} options={options}></Doughnut>
         <S.VoteNumber>
           <Font text="투표인원" kind="Label3" color="gray400" />
-          <Font text="259명" kind="Heading2" />
+          <Font text={`${TotalVote}명`} kind="Heading2" />
         </S.VoteNumber>
       </S.DoughnutContent>
-
       <S.ResultWrap>
         <Font text="전체결과" kind="Body1" color="gray300" />
-        {result.map((value, index) => (
-          <S.MenuAndPercent key={index}>
+        {data?.polls[6]?.options.map((option, index) => (
+          <S.MenuAndPercent key={option.id}>
             <S.MenuWrap>
               <S.PointLine
                 style={{ backgroundColor: labelColor[index] }}
               ></S.PointLine>
-              <Font text={value.menu} kind="Heading3" color="gray600" />
-              {value.king ? <S.Image src={Crown} /> : null}
+              <Font text={option.description} kind="Heading3" color="gray600" />
             </S.MenuWrap>
-            <Font text={`${value.percent}%`} kind="Body1" color="gray600" />
+            <Font text={`${option.voteRate}%`} kind="Body1" color="gray600" />
           </S.MenuAndPercent>
         ))}
       </S.ResultWrap>
