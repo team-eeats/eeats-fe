@@ -14,5 +14,7 @@ export const useModal = (type: string) => {
   return {
     isOpen: modalType === type && isOpen,
     onToggle,
+    openModal,
+    closeModal,
   };
 };

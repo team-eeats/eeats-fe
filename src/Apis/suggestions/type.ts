@@ -45,3 +45,9 @@ export type Comment = {
   id: string;
   content: string;
 };
+
+export type SuggestDetailResponse = {
+  id: string;
+  title: string;
+  content: string;
+};

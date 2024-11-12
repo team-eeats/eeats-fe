@@ -5,6 +5,7 @@ import {
   SuggestListResponse,
   ModifySuggestRequest,
   GetMySuggestResponse,
+  SuggestDetailResponse,
 } from "./type";
 
 const router = "/suggestions";
@@ -13,7 +14,7 @@ export const CreateSuggest = async (data: CreateSuggestRequest) => {
   return await instance.post(`${router}`, data);
 };
 
-export const ModifyNotice = (suggestionId: string) => {
+export const ModifySuggest = (suggestionId: string) => {
   return useMutation(
     async (modifySuggestData: ModifySuggestRequest) => {
       const { data } = await instance.patch(
@@ -40,4 +41,8 @@ export const DeleteSuggest = async (suggestionId: string) => {
 
 export const SuggestList = async () => {
   return await instance.get<SuggestListResponse>(`${router}`);
+};
+
+export const SuggestDetail = async (suggestionId: string) => {
+  return await instance.get<SuggestDetailResponse>(`${router}/${suggestionId}`);
 };
