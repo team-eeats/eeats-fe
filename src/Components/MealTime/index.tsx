@@ -2,6 +2,7 @@ import { useState } from "react";
 import * as S from "./style";
 import { Font } from "../../Styles/Font";
 import MealList from "../LengthMeal/index";
+import AllergyNotification from "../AllergyNotification/AllergyNotification";
 
 /**
  * @returns 아침, 점심, 저녁 선택 컴포넌트
@@ -33,6 +34,7 @@ const MealTime = () => {
         ))}
       </S.Container>
       <MealList selectedMeal={selectedMeal} />
+      <AllergyNotification selectedMeal={selectedMeal} />
     </>
   );
 };
