@@ -7,6 +7,8 @@ export const NoticeList = async () => {
   return await instance.get<NoticeListResponse>(`${router}`);
 };
 
-export const NoticeDetail = async (noticeId: number) => {
-  return await instance.get<NoticeDetailResponse>(`${router}/${noticeId}`);
+export const NoticeDetail = async (noticeId: string) => {
+  return await instance.get<NoticeDetailResponse>(
+    `${router}/details/${noticeId}`
+  );
 };
