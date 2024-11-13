@@ -1,20 +1,22 @@
 import useModalStore from "../store/useModalStore";
 
-export const useModal = (type: string) => {
-  const { modalType, isOpen, openModal, closeModal } = useModalStore();
+export const useModal = (id: string) => {
+  const isOpen = useModalStore((state: any) => state.isOpen(id));
+  const openModal = () => useModalStore.getState().openModal(id);
+  const closeModal = () => useModalStore.getState().closeModal(id);
 
   const onToggle = () => {
-    if (modalType === type && isOpen) {
+    if (isOpen) {
       closeModal();
     } else {
-      openModal(type);
+      openModal();
     }
   };
 
   return {
-    isOpen: modalType === type && isOpen,
-    onToggle,
+    isOpen,
     openModal,
     closeModal,
+    onToggle,
   };
 };
