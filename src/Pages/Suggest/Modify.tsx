@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import * as S from "./style";
 import { Font } from "../../Styles/Font";
 import Button from "../../Components/Button";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import useInputStore from "../../store/useInputStore";
 import { ModifySuggest, SuggestDetail } from "../../Apis/suggestions";
 
 const Modify = () => {
-  const navigate = useNavigate();
   const { state } = useLocation();
   const { inputs, setInput } = useInputStore();
   const [content, setContent] = useState<string>("");
@@ -60,7 +59,7 @@ const Modify = () => {
     };
     modifySuggest(suggeatData, {
       onSuccess: () => {
-        navigate("/notice");
+        console.log("happy");
       },
       onError: (error) => {
         console.error(error);
@@ -78,7 +77,7 @@ const Modify = () => {
           <S.Write>
             <S.LabelWrap>
               <Font text="제목" kind="Label2" />
-              <S.Input placeholder="제목을 작성해주세요"></S.Input>
+              <S.Input placeholder="제목을 작성해주세요" />
             </S.LabelWrap>
             <S.LabelWrap>
               <Font text="건의 내용" kind="Label2" />
@@ -86,7 +85,7 @@ const Modify = () => {
                 <S.TextArea
                   placeholder="건의 내용을 작성해주세요"
                   onChange={(e) => onInputHandler(e)}
-                ></S.TextArea>
+                />
                 <S.CharacterLimitation>
                   <Font
                     text={`${inputCount}/30`}

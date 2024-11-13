@@ -26,6 +26,9 @@ const Suggest = () => {
     fetchSuggestList();
   }, []);
 
+  console.log(suggestList?.suggestions.map((value) => (value)));
+  
+
   return (
     <S.Container>
       <S.Content>
