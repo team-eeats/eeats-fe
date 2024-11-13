@@ -1,71 +1,66 @@
-import { useEffect, useState } from "react";
-import * as S from "./style";
-import { Font } from "../../Styles/Font";
-import Button from "../../Components/Button";
-import { useLocation } from "react-router-dom";
-import useInputStore from "../../store/useInputStore";
-import { ModifySuggest, SuggestDetail } from "../../Apis/suggestions";
+import * as S from "./style"
+import { Font } from "../../Styles/Font"
+import useInputStore from "../../store/useInputStore"
+import { useEffect, useState } from "react"
+import Button from "../../Components/Button"
+import { useNavigate, useParams } from "react-router-dom"
+import { ModifySuggest, SuggestDetail } from "../../Apis/suggestions"
 
 const Modify = () => {
-  const { state } = useLocation();
-  const { inputs, setInput } = useInputStore();
-  const [content, setContent] = useState<string>("");
-  const [active, setActive] = useState<boolean>(false);
+  const navigate = useNavigate()
 
-  const suggestionId = state?.noticeId || "";
+  const { suggestionId } = useParams()
+  const { inputs, setInput } = useInputStore()
 
-  const { mutate: modifySuggest } = ModifySuggest(suggestionId);
-  const [inputCount, setInputCount] = useState<number>(0);
-  const [excessLimit, setExcessLimit] = useState<boolean>(false);
+  const { mutate: modifySuggest } = ModifySuggest(suggestionId || '')
 
-  const onInputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newCount = e.target.value.length;
-    setInputCount(newCount);
-    if (newCount > 30) {
-      setExcessLimit(true);
-    } else {
-      setExcessLimit(false);
+  const [active, setActive] = useState<boolean>(false)
+  const [content, setContent] = useState<string>("")
+  const [contentCount, setContentCount] = useState<number>(0)
+
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput("title", e.target.value)
+  }
+
+  const onContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newContent = e.target.value
+    setContent(newContent)
+    setContentCount(newContent.length)
+  }
+
+  const handleUpload = () => {
+    const suggestData = {
+      title: inputs["title"],
+      content,
+    };
+    try {
+      modifySuggest(suggestData)
+      navigate('/suggest')
+      window.location.reload()
+    } catch (error) {
+      console.error(error)
     }
   };
 
   useEffect(() => {
     const handleDetail = async () => {
-      if (!state?.noticeId) {
-        console.error("noticeId is missing in state");
-        return;
-      }
       try {
-        const response = await SuggestDetail(state.noticeId);
-        setInput("title", response.data.title);
-        setContent(response.data.content);
+        const response = await SuggestDetail(suggestionId || '')
+        setInput("title", response.data.title)
+        setContent(response.data.content)
+        setContentCount(response.data.content.length)
+        console.log("건의 디테일", response.data)
       } catch (error) {
-        console.log(error);
+        console.error(error)
       }
-    };
-
-    if (state?.noticeId) {
-      handleDetail();
     }
-  }, [state, setInput]);
+    handleDetail()
+
+  }, [suggestionId, setInput]);
 
   useEffect(() => {
-    setActive(!!inputs["title"] && !!content);
-  }, [inputs, content]);
-
-  const handleUpload = () => {
-    const suggeatData = {
-      title: inputs["title"],
-      content,
-    };
-    modifySuggest(suggeatData, {
-      onSuccess: () => {
-        console.log("happy");
-      },
-      onError: (error) => {
-        console.error(error);
-      },
-    });
-  };
+    setActive(!!inputs["title"] && !!content && contentCount <= 30);
+  }, [inputs, content, contentCount]);
 
   return (
     <S.Container>
@@ -77,20 +72,25 @@ const Modify = () => {
           <S.Write>
             <S.LabelWrap>
               <Font text="제목" kind="Label2" />
-              <S.Input placeholder="제목을 작성해주세요" />
+              <S.Input
+                placeholder="제목을 작성해주세요"
+                value={inputs["title"] || ""}
+                onChange={onTitleChange}
+              />
             </S.LabelWrap>
             <S.LabelWrap>
               <Font text="건의 내용" kind="Label2" />
               <S.TextAreaWrap>
                 <S.TextArea
                   placeholder="건의 내용을 작성해주세요"
-                  onChange={(e) => onInputHandler(e)}
+                  onChange={onContentChange}
+                  value={content}
                 />
                 <S.CharacterLimitation>
                   <Font
-                    text={`${inputCount}/30`}
+                    text={`${contentCount}/30`}
                     kind="Caption2"
-                    color={`${excessLimit ? "main300" : "gray300"}`}
+                    color={active ? "gray300" : "main300"}
                   />
                 </S.CharacterLimitation>
               </S.TextAreaWrap>
@@ -100,7 +100,7 @@ const Modify = () => {
         <Button text="수정하기" activate={active} onClick={handleUpload} />
       </S.SubmitContent>
     </S.Container>
-  );
-};
+  )
+}
 
-export default Modify;
+export default Modify

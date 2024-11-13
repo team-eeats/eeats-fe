@@ -15,7 +15,12 @@ import { useModal } from "../../Hook/useModal";
 const UserSuggestBox = ({ value }: { value: Suggestions }) => {
   const suggestionId = value.id;
   const [selected, setSelected] = useState(false);
-  const { openModal, closeModal, isOpen } = useModal("suggestionModal");
+  const { openModal, closeModal, isOpen } = useModal(suggestionId);
+
+  const handleOpenModal = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    openModal();
+  };
 
   return (
     <S.Container onClick={() => setSelected(!selected)}>
@@ -27,7 +32,7 @@ const UserSuggestBox = ({ value }: { value: Suggestions }) => {
         <img
           src={Setting}
           alt="더보기"
-          onClick={() => openModal("suggestionModal")}
+          onClick={handleOpenModal}
         />
       </S.TopWrap>
 

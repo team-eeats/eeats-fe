@@ -17,7 +17,7 @@ function router() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/suggest" element={<Suggest />} />
-          <Route path="/suggestModify" element={<SuggestModify />} />
+          <Route path="/suggestModify/:suggestionId" element={<SuggestModify />} />
           <Route path="/suggestUpload" element={<SuggestUpload />} />
           <Route path="/notice" element={<NoticePage />} />
           <Route path="/mysuggest" element={<MySuggestPage />} />
