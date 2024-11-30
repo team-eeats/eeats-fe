@@ -13,7 +13,8 @@ export type Suggestions = {
   title: string;
   content: string;
   createdAt: string;
-  coment: SuggestComment[];
+  comment: SuggestComment;
+  accountId: string;
 };
 
 export type SuggestComment = {
@@ -42,5 +43,11 @@ export type MySuggestions = {
 
 export type Comment = {
   id: string;
+  content: string;
+};
+
+export type SuggestDetailResponse = {
+  id: string;
+  title: string;
   content: string;
 };
