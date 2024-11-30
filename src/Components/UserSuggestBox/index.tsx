@@ -27,15 +27,14 @@ const UserSuggestBox = ({ value }: { value: Suggestions }) => {
       <S.TopWrap>
         <S.NicknameAndDateWrap>
           <Font text={value.accountId} kind="Body1" color="main200" />
-          <Font text={value.createdAt} kind="Body1" color="gray300" />
+          <Font
+            text={value.createdAt.split("T")[0]}
+            kind="Body1"
+            color="gray300"
+          />
         </S.NicknameAndDateWrap>
-        <img
-          src={Setting}
-          alt="더보기"
-          onClick={handleOpenModal}
-        />
+        <img src={Setting} alt="더보기" onClick={handleOpenModal} />
       </S.TopWrap>
-
       <Font text={value.title} kind="Heading3" />
       <Font text={value.content} kind="Body2" color="gray600" />
 
