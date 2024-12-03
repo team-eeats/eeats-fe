@@ -1,7 +1,13 @@
 import styled from "styled-components";
+import { Color } from "../../Styles/Color";
+
+export const Background = styled.div`
+  background-color: rgba(0,0,0,0.2)
+`
 
 export const Container = styled.div`
   position: absolute;
+  top: 40vh;
   right: 30vw;
   display: flex;
   flex-direction: column;
@@ -10,6 +16,7 @@ export const Container = styled.div`
   height: 279px;
   border-radius: 20px;
   border: 1px solid black;
+  background-color: ${Color.white};
   padding: 28px;
   > div {
     align-self: flex-end;
