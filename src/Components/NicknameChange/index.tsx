@@ -11,7 +11,10 @@ type NicknameChangeProps = {
   onNicknameChange?: (newNickname: string) => void;
 };
 
-export const NicknameChange: React.FC<NicknameChangeProps> = ({ onClose, onNicknameChange }) => {
+export const NicknameChange: React.FC<NicknameChangeProps> = ({
+  onClose,
+  onNicknameChange,
+}) => {
   const [nickname, setNickname] = useState("");
 
   const handleChangeNickname = async () => {
@@ -28,7 +31,11 @@ export const NicknameChange: React.FC<NicknameChangeProps> = ({ onClose, onNickn
   return (
     <S.Background>
       <S.Container>
-        <Font text="변경할 닉네임을 입력해주세요" kind="Heading3" color="black" />
+        <Font
+          text="변경할 닉네임을 입력해주세요"
+          kind="Heading3"
+          color="black"
+        />
         <Input
           placeholder="멋진 토마토"
           type="text"

@@ -1,8 +1,21 @@
 import { Font } from "../../Styles/Font";
 import * as S from "./style";
 import CheckCancelButton from "../CheckCancelButton";
+import { Cookie } from "../../utils/cookie";
+import { useNavigate } from "react-router-dom";
 
-export const Logout = () => {
+type LogoutProps = {
+  onClose: () => void;
+};
+
+export const Logout: React.FC<LogoutProps> = () => {
+  const navigate = useNavigate();
+  const logout = () => {
+    Cookie.remove("accessToken");
+    Cookie.remove("refreshToken");
+    Cookie.remove("nickname");
+    navigate("/");
+  };
   return (
     <S.Container>
       <S.Content>
@@ -14,7 +27,7 @@ export const Logout = () => {
             color="gray600"
           />
         </S.TextWrap>
-        <CheckCancelButton />
+        <CheckCancelButton Check={logout} Cancel={close} />
       </S.Content>
     </S.Container>
   );

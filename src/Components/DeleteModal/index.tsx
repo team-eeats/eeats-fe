@@ -1,8 +1,18 @@
 import { Font } from "../../Styles/Font";
 import * as S from "./style";
 import CheckCancelButton from "../CheckCancelButton";
+import { DeleteSuggest } from "../../Apis/suggestions";
 
 const DeleteModal = ({ id, close }: { id: string; close: () => void }) => {
+  const handleDelete = async () => {
+    try {
+      await DeleteSuggest(id);
+      close();
+      location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <S.Container>
       <S.Content>
@@ -14,7 +24,7 @@ const DeleteModal = ({ id, close }: { id: string; close: () => void }) => {
             color="gray600"
           />
         </S.TextWrap>
-        <CheckCancelButton id={id} close={close} />
+        <CheckCancelButton Check={handleDelete} Cancel={close} />
       </S.Content>
     </S.Container>
   );

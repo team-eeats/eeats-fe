@@ -49,6 +49,7 @@ export const List = styled.div`
   gap: 12px;
   align-items: center;
   padding: 12px 0px;
+  cursor: pointer;
 `;
 
 export const Icon = styled.img`

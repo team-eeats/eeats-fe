@@ -1,22 +1,12 @@
 import * as S from "./style";
 import { Font } from "../../Styles/Font";
-import { DeleteSuggest } from "../../Apis/suggestions";
 
 interface ButtonProps {
   Check: () => void;
   Cancel: () => void;
 }
 
-const CheckCancelButton = ({Check, Cancel}: ButtonProps) => {
-  // const handleDelete = async () => {
-  //   try {
-  //     await DeleteSuggest(id);
-  //     close();
-  //     location.reload();
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+const CheckCancelButton = ({ Check, Cancel }: ButtonProps) => {
   return (
     <S.ButtonWrap>
       <S.CancelButton onClick={Cancel}>
