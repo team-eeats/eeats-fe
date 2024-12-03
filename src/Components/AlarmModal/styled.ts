@@ -15,6 +15,7 @@ export const Container = styled.div`
   padding: 16px 0px 16px 20px;
   overflow: scroll;
   overflow-x: hidden;
+  z-index: 30;
 
   &::-webkit-scrollbar {
     width: 4px;

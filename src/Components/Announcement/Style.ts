@@ -9,5 +9,6 @@ export const Container = styled.div`
   border-radius: 40px;
   gap: 40px;
   padding: 0 30px;
-  background-color: ${Color.main0}
+  background-color: ${Color.main0};
+  cursor: pointer;
 `;
