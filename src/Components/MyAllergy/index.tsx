@@ -1,14 +1,17 @@
+import { MyPageAllergiesType } from "../../Apis/users/type";
 import { Font } from "../../Styles/Font";
 import * as S from "./style";
 
 interface AllergyTagsPropsType {
-  food: string;
+  food: MyPageAllergiesType;
 }
 
-export const MyAllergy = (props: AllergyTagsPropsType) => {
+export const MyAllergy = ({food}: AllergyTagsPropsType) => {
   return (
     <S.MyAllergy>
-      <Font text={props.food} kind="label3" color="white"></Font>
+      {food.type.map((allergy) => (
+        <Font text={allergy} kind="label3" color="white"></Font>
+      ))}
     </S.MyAllergy>
   );
 };
