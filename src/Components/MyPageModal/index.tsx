@@ -4,13 +4,13 @@ import * as S from "./styled";
 import Notice from "../../Assets/img/SVG/Notice.svg";
 import Medicine from "../../Assets/img/SVG/Medicine.svg";
 import Suggest from "../../Assets/img/SVG/suggest.svg";
-import Logout from "../../Assets/img/SVG/Logout.svg";
+import LogoutIcon from "../../Assets/img/SVG/Logout.svg";
 import { MyAllergy } from "../MyAllergy";
 import { NicknameChange } from "../NicknameChange";
 import { ChooseAllergy } from "../ChooseAllergy";
 import { MyPage } from "../../Apis/users";
 import { MyPageResponse } from "../../Apis/users/type";
-
+import { Logout } from "../Logout";
 
 type MyPageModalProps = {
   onClose: () => void;
@@ -19,6 +19,7 @@ type MyPageModalProps = {
 export const MyPageModal: React.FC<MyPageModalProps> = () => {
   const [isNicknameChangeOpen, setNicknameChangeOpen] = useState(false);
   const [isAllergyChangeOpen, setAllergyChangeOpen] = useState(false);
+  const [isLogoutOpen, setLogoutOpen] = useState(false);
   const [userData, setUserData] = useState<MyPageResponse | null>(null);
 
   useEffect(() => {
@@ -33,11 +34,16 @@ export const MyPageModal: React.FC<MyPageModalProps> = () => {
     fetchUserData();
   }, []);
 
-  const setModalOpen = (modal: "nickname" | "allergy", isOpen: boolean) => {
+  const setModalOpen = (
+    modal: "nickname" | "allergy" | "logout",
+    isOpen: boolean
+  ) => {
     if (modal === "nickname") {
       setNicknameChangeOpen(isOpen);
     } else if (modal === "allergy") {
       setAllergyChangeOpen(isOpen);
+    } else if (modal === "logout") {
+      setLogoutOpen(isOpen);
     }
   };
   const handleNicknameChange = () => {
@@ -65,11 +71,13 @@ export const MyPageModal: React.FC<MyPageModalProps> = () => {
     return (
       <NicknameChange
         onClose={() => setModalOpen("nickname", false)}
-        onNicknameChange={handleNicknameChange} 
+        onNicknameChange={handleNicknameChange}
       />
     );
   } else if (isAllergyChangeOpen) {
     return <ChooseAllergy onClose={() => setModalOpen("allergy", false)} />;
+  } else if (isLogoutOpen) {
+    return <Logout onClose={() => setModalOpen("logout", false)} />;
   }
 
   return (
@@ -77,7 +85,10 @@ export const MyPageModal: React.FC<MyPageModalProps> = () => {
       <S.Container>
         <S.TopWrapper>
           <S.TextWrapper>
-            <Font text={userData ? userData.nickname : "Loading..."} kind="Body2" />
+            <Font
+              text={userData ? userData.nickname : "Loading..."}
+              kind="Body2"
+            />
             <S.Div onClick={() => setModalOpen("nickname", true)}>
               <Font text="수정하기" kind="Body4" color="gray300" />
             </S.Div>
@@ -98,8 +109,8 @@ export const MyPageModal: React.FC<MyPageModalProps> = () => {
           ))}
         </S.ListWrapper>
         <S.Line></S.Line>
-        <S.List>
-          <S.Icon src={Logout} />
+        <S.List onClick={() => setModalOpen("logout", true)}>
+          <S.Icon src={LogoutIcon} />
           <Font text="로그아웃" />
         </S.List>
       </S.Container>

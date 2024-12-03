@@ -1,6 +1,6 @@
 import * as S from "./style";
 import { Font } from "../../Styles/Font";
-import Input from "../../Components/Input/Input";
+import Input from "../../Components/Input";
 import Button from "../../Components/Button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
