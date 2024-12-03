@@ -3,26 +3,18 @@ import { Font } from "../../Styles/Font";
 import { DeleteSuggest } from "../../Apis/suggestions";
 
 interface ButtonProps {
-  id: string;
-  close: () => void;
+  onConfirm: () => void;
+  onCancel: () => void;
 }
 
-const CheckCancelButton = ({ id, close }: ButtonProps) => {
-  const handleDelete = async () => {
-    try {
-      await DeleteSuggest(id);
-      close();
-      location.reload();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+const CheckCancelButton = ({ onConfirm, onCancel }: ButtonProps) => {
+
   return (
     <S.ButtonWrap>
-      <S.CancelButton onClick={close}>
+      <S.CancelButton onClick={onCancel}>
         <Font text="취소" kind="Button2" color="white" />
       </S.CancelButton>
-      <S.CheckButton onClick={handleDelete}>
+      <S.CheckButton onClick={onConfirm}>
         <Font text="확인" kind="Button2" color="white" />
       </S.CheckButton>
     </S.ButtonWrap>
