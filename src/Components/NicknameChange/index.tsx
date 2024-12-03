@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { ModifyMyinfo } from "../../Apis/users";
-import { Font } from "../../Styles/Font";
-import CheckCancelButton from "../CheckCancelButton";
-import Input from "../Input";
 import * as S from "./style";
+import { Font } from "../../Styles/Font";
+import { ModifyMyinfo } from "../../Apis/users";
+import { useState } from "react";
 import { Cookie } from "../../utils/cookie";
+import Input from "../Input";
+import CheckCancelButton from "../CheckCancelButton";
 
 type NicknameChangeProps = {
   onClose: () => void;
@@ -18,7 +18,7 @@ export const NicknameChange: React.FC<NicknameChangeProps> = ({ onClose, onNickn
     try {
       const res = await ModifyMyinfo({ nickname });
       Cookie.set("nickname", res.data.nickname);
-      if (onNicknameChange) onNicknameChange();
+      if (onNicknameChange) onNicknameChange(res.data.nickname);
       onClose();
     } catch (err) {
       console.error(err);
@@ -37,7 +37,7 @@ export const NicknameChange: React.FC<NicknameChangeProps> = ({ onClose, onNickn
           onChange={(e) => setNickname(e.target.value)}
         />
         <div>
-          <CheckCancelButton onConfirm={handleChangeNickname} onCancel={onClose} />
+          <CheckCancelButton Check={handleChangeNickname} Cancel={onClose} />
         </div>
       </S.Container>
     </S.Background>
